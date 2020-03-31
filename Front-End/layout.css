@@ -1,0 +1,38 @@
+.body{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 4fr;
+}
+
+.student-info{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.chat{
+    grid-column: 1;
+    grid-row: 2;
+}
+
+
+.assignments{
+    grid-column: 2;
+    grid-row: 2;
+}
+
+
+.schedule{
+    grid-column: 3;
+    grid-row: 2;
+}
+
+
+.grades{
+    grid-column: 4;
+    grid-row: 2;
+}
+
+h1{
+    grid-column: 2/4;
+    grid-row: 1;
+} 
