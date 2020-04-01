@@ -1,13 +1,12 @@
 package com.WCCI.app;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Collection;
 @Entity
 public class Course {
-
+    @ManyToOne
+    private Teacher teacher;
+    private String classTime;
     @Id
     @GeneratedValue
     private Long id;
@@ -21,7 +20,11 @@ public class Course {
     public Course(String name){
         this.name = name;
     }
-    public void addStudent() {
-
+    public Course(String name, Long id, Teacher teacher, String classTime){
+        this.name = name;
+        this.id = id;
+        this.classTime = classTime;
+        this.teacher = teacher;
     }
+
 }
