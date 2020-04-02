@@ -27,9 +27,8 @@ public class Course {
     public Course(String name){
         this.name = name;
     }
-    public Course(String name, Long id, Teacher teacher, String classTime){
+    public Course(String name, Teacher teacher, String classTime,Collection<Student>students){
         this.name = name;
-        this.id = id;
         this.classTime = classTime;
         this.teacher = teacher;
     }

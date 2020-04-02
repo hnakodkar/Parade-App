@@ -19,9 +19,9 @@ public class Conversation {
     @ManyToMany
     private Collection<Teacher>teachers;
 
-    public Conversation (String content , Long id){
+    public Conversation (String content ){
         this.content = content;
-        this.id = id;
+
     }
     public Conversation (){}
 

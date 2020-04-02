@@ -22,17 +22,15 @@ public class Student {
     private Long id;
 
     private String  name;
-    private HashMap < Course,int> grades;
+   // private HashMap < Course,int> grades;
 
     public Student(){}
-    public Student(String name, Long id){
+    public Student(String name){
         this.name = name;
-        this.id = id;
 
     }
-    public Student(String name, Long id, String parentName, String schoolId, String parentEmail, String parentPhone, String language){
+    public Student(String name,  String parentName, String schoolId, String parentEmail, String parentPhone, String language){
         this.name = name;
-        this.id = id;
         this.parentName = parentName;
         this.schoolId = schoolId;
         this.parentEmail = parentEmail;
