@@ -19,8 +19,8 @@ const createFooter = () => {
     const footerContent = document.createElement('div');
     const hetal = footerLinkCreator('http://hnakodkar.github.io/', 'Hetal Nakodkar');
     const abdul = footerLinkCreator('http://hnakodkar.github.io/', 'Abdul Abdul ');
-    const daly = footerLinkCreator('http://hnakodkar.github.io/', 'Daly Tekam');
-    const nadir = footerLinkCreator('http://hnakodkar.github.io/', 'Nadir Nadir');
+    const daly = footerLinkCreator('http://dalytekam.github.io/', 'Daly Tekam');
+    const nadir = footerLinkCreator('https://nayhova.github.io', 'Nadir Carpenter');
     const olivia = footerLinkCreator('http://hnakodkar.github.io/', 'Olivia Smith');
     const innocent = footerLinkCreator('http://hnakodkar.github.io/', 'Innocent Mbanda');
 
