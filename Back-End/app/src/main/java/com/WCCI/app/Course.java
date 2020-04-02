@@ -1,7 +1,10 @@
 package com.WCCI.app;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashMap;
+
 @Entity
 public class Course {
     @ManyToOne
@@ -15,6 +18,10 @@ public class Course {
 
     @ManyToMany(mappedBy = "courses")
     private Collection<Student> students;
+    @OneToMany(mappedBy = "course")
+    private Collection<Assignment>assignments;
+
+    private HashMap<Timestamp, String> annoucements;
 
     public Course(){}
     public Course(String name){
@@ -27,4 +34,20 @@ public class Course {
         this.teacher = teacher;
     }
 
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public String getClassTime() {
+        return classTime;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
