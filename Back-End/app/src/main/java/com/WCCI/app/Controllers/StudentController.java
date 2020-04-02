@@ -30,15 +30,16 @@ public class StudentController {
     {return (Collection<Student>) studentRepo.findAll();}
 
     @GetMapping ("/students/{id}")
-
     public Student retrieveSingleStudent (@PathVariable Long id){
         Student retrievedStudent =studentRepo.findById(id).get();
         return retrievedStudent;
     }
 
-    @PostMapping ("/students/{id}")
+    @PostMapping ("/students")
     public Student addStudent(@RequestBody Student studentToAdd){
         return studentRepo.save(studentToAdd);
     }
 
 }
+
+

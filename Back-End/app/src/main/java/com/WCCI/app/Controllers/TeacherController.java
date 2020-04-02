@@ -3,10 +3,7 @@ package com.WCCI.app.Controllers;
 import com.WCCI.app.Student;
 import com.WCCI.app.Teacher;
 import com.WCCI.app.repository.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -27,11 +24,18 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    public Collection<Student> retrieveStudents()
-    {return (Collection<Student>) studentRepository.findAll();}
+    public Collection<Teacher> retrieveTeachers()
+    {return (Collection<Teacher>) teacherRepository.findAll();}
 
-    @PostMapping ("/teachers/{id}")
+    @PostMapping ("/teachers")
     public Teacher addAteacher (@RequestBody Teacher teacherToAdd){
         return teacherRepository.save(teacherToAdd);
+    }
+
+    @GetMapping("/teachers/{id}")
+    public Teacher retrieveSingleTeacher(@PathVariable Long id
+    )
+    {
+        return teacherRepository.findById(id).get();
     }
 }

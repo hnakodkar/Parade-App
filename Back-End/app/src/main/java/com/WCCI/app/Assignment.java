@@ -1,6 +1,7 @@
 package com.WCCI.app;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Assignment {
@@ -12,12 +13,14 @@ public class Assignment {
     @ManyToOne
     private Course course;
 
-
-    public Assignment (String name){
-        this.name = name;
+    public Assignment() {
     }
 
-    public Assignment (){}
+    public Assignment(String name, Course course) {
+        this.name = name;
+        this.course= course;
+
+    }
 
     public String getName() {
         return name;
@@ -30,6 +33,4 @@ public class Assignment {
     public Course getCourse() {
         return course;
     }
-
-
 }
