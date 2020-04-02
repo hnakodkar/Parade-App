@@ -1,15 +1,17 @@
 package com.WCCI.app;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 
 @Entity
 public class Student {
+    @ManyToMany(mappedBy = "students")
+    private Collection<Conversation> conversations;
+    @ManyToMany
+    private Collection<Course>courses;
     private String language;
     private String parentPhone;
     private String parentEmail;
@@ -20,9 +22,7 @@ public class Student {
     private Long id;
 
     private String  name;
-
-    @ManyToMany
-    private Collection<Course> courses;
+    private HashMap < Course,int> grades;
 
     public Student(){}
     public Student(String name, Long id){
@@ -45,4 +45,27 @@ public class Student {
         return name;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getParentPhone() {
+        return parentPhone;
+    }
+
+    public String getParentEmail() {
+        return parentEmail;
+    }
+
+    public String getSchoolId() {
+        return schoolId;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

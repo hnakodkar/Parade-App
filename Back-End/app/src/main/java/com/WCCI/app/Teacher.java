@@ -1,10 +1,7 @@
 package com.WCCI.app;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
@@ -14,6 +11,8 @@ public class Teacher {
     private String schoolId;
     @OneToMany(mappedBy = "teacher")
     private Collection<Course> courses;
+    @ManyToMany(mappedBy = "teachers")
+    private Collection<Conversation>conversations;
     @Id
     @GeneratedValue
     private Long id;
@@ -29,4 +28,24 @@ public class Teacher {
         this.phone = phone;
     }
     public Teacher(){}
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSchoolId() {
+        return schoolId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
