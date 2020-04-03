@@ -12,15 +12,13 @@ public class TeacherController {
     private TeacherRepository teacherRepository;
     private StudentRepository studentRepository;
     private CourseRepository courseRepo;
-    private AssignmentRepository assignmentRepo;
     private ConversationRepository conversationRepo;
 
-    public TeacherController(TeacherRepository teacherRepository, StudentRepository studentRepository, CourseRepository courseRepo, AssignmentRepository assignmentRepo,ConversationRepository conversationRepo){
+    public TeacherController(TeacherRepository teacherRepository, StudentRepository studentRepository, CourseRepository courseRepo, ConversationRepository conversationRepo){
         this.teacherRepository = teacherRepository;
         this.studentRepository = studentRepository;
         this.conversationRepo =conversationRepo;
         this.courseRepo =courseRepo;
-        this.assignmentRepo =assignmentRepo;
     }
 
     @GetMapping("/teachers")
