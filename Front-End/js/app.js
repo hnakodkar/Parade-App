@@ -46,7 +46,6 @@ const displayHeader = () => {
     headerAnchor.appendChild(createHeader());
 }
 
-
 const displayTeacherForm = () => {
 
     anchor.appendChild(createTeacherForm());
