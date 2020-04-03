@@ -18,10 +18,12 @@ public class Course {
 
     @ManyToMany(mappedBy = "courses")
     private Collection<Student> students;
-    @OneToMany(mappedBy = "course")
-    private Collection<Assignment>assignments;
 
-    private HashMap<Timestamp, String> annoucements;
+
+    @ElementCollection
+    private Collection<Assignment> assignments;
+
+//    private HashMap<Timestamp, String> announcements;
 
     public Course(){}
     public Course(String name){
@@ -33,7 +35,9 @@ public class Course {
         this.teacher = teacher;
     }
 
-
+    public Collection<Assignment> getAssignments() {
+        return assignments;
+    }
     public Teacher getTeacher() {
         return teacher;
     }

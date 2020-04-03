@@ -1,36 +1,46 @@
 package com.WCCI.app;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 
-@Entity
+@Embeddable
 public class Assignment {
     private String name;
-    @Id
-    @GeneratedValue
-    private Long id;
+    private String desription;
+    private Long time;
 
-    @ManyToOne
-    private Course course;
 
-    public Assignment() {
-    }
+    public Assignment() {}
 
-    public Assignment(String name, Course course) {
+    public Assignment(String name, String desription, Long time) {
         this.name = name;
-        this.course= course;
 
+        this.desription = desription;
+        this.time = time;
     }
 
     public String getName() {
         return name;
     }
 
-    public Long getId() {
-        return id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Course getCourse() {
-        return course;
+    public String getDesription() {
+        return desription;
+    }
+
+    public void setDesription(String desription) {
+        this.desription = desription;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
     }
 }

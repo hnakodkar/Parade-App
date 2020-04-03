@@ -38,7 +38,11 @@ public class CourseController {
 
 
     }
-
+    @GetMapping("/courses/{id}")
+    public Collection<Assignment> retrieveAssignmentByCourse(@PathVariable Long id){
+        Course retrievedCourse = courseRepo.findById(id).get();
+        return retrievedCourse.getAssignments();
+    }
 }
 
 
