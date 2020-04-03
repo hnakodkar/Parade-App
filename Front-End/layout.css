@@ -188,6 +188,7 @@ body {
 
 .chat {
     grid-template-rows: 1fr 6fr 1fr;
+    grid-column: 1/2;
 }
 
 
@@ -195,6 +196,7 @@ body {
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     margin: 2rem;
 }
 
@@ -255,7 +257,7 @@ body {
 .assignment {
 
     grid-template-rows: 1fr 6fr;
-
+    grid-column: 2/3;
 }
 
 .assignment-body {

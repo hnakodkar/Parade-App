@@ -40,12 +40,12 @@ const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
 
-const renderLogin = () => {
+/*const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
     }
     anchor.appendChild(createLogin());
-}
+}*/
 
 const displayFooter = () => {
 
@@ -86,7 +86,7 @@ const displayAssignmentForm = () => {
 
 const displayChatView = () => {
 
-    anchor.prepend(createChatView());
+    anchor.appendChild(createChatView());
 }
 
 const displayAssignmentView = () => {
