@@ -24,16 +24,28 @@ import {
     createUserInfosCard
 } from './userInfos.js';
 
+import {
+    createAssignment
+} from './assignmentForm.js';
+
+import {
+    createChatView
+} from './chatComponent.js';
+
+import {
+    createAssignmentView
+} from './assignmentComponent.js';
+
 const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
 
-const renderLogin = () => {
+/*const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
     }
     anchor.appendChild(createLogin());
-}
+}*/
 
 const displayFooter = () => {
 
@@ -66,16 +78,37 @@ const displayCourseForm = () => {
     anchor.appendChild(createCourseForm());
 }
 
-displayUserInfos();
-displayStudentForm();
+const displayAssignmentForm = () => {
+
+    anchor.appendChild(createAssignment());
+}
+
+const displayChatView = () => {
+
+    anchor.appendChild(createChatView());
+}
+
+const displayAssignmentView = () => {
+
+    anchor.appendChild(createAssignmentView());
+}
+
+
 displayHeader();
 displayFooter();
-displayTeacherForm();
-displayCourseForm();
+displayAssignmentView();
+displayChatView();
 
-const btn = document.createElement('button');
+/*displayUserInfos();
+displayStudentForm();*/
+/*displayTeacherForm();
+displayCourseForm();
+displayAssignmentForm();*/
+
+
+/*const btn = document.createElement('button');
 btn.innerText = 'User Login';
 anchor.appendChild(btn);
 btn.addEventListener('click', () => {
     renderLogin();
-});
+});*/
