@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,7 +23,7 @@ public class Pouplator implements CommandLineRunner {
     AssignmentRepository assignmentRepository;
     @Autowired
     ConversationRepository conversationRepository;
-
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 
     @Override
@@ -48,9 +49,9 @@ public class Pouplator implements CommandLineRunner {
         courseRepo.save(biology);
         courseRepo.save(english);
 
-        Assignment mathAssignment= new Assignment("mathAssignment",math);
-        Assignment bioAssignment= new Assignment("bioAssignment",biology);
-        Assignment englishAssignment= new Assignment("englishAssignment",english);
+        Assignment mathAssignment= new Assignment("mathAssignment", "homework 2", timestamp.getTime());
+        Assignment bioAssignment= new Assignment("bioAssignment", "cells Homework",timestamp.getTime()) ;
+        Assignment englishAssignment= new Assignment("englishAssignment","Hamlet reading", timestamp.getTime());
         assignmentRepository.save(mathAssignment);
         assignmentRepository.save(englishAssignment);
         assignmentRepository.save(bioAssignment);
