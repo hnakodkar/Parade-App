@@ -11,13 +11,11 @@ import java.util.Collection;
 public class CourseController {
     private StudentRepository studentRepo;
     private TeacherRepository teacherRepo;
-    private AssignmentRepository assignmentRepo;
     private CourseRepository courseRepo;
 
-    public CourseController(StudentRepository studentRepo, TeacherRepository teacherRepo, AssignmentRepository assignmentRepo, CourseRepository courseRepo) {
+    public CourseController(StudentRepository studentRepo, TeacherRepository teacherRepo,  CourseRepository courseRepo) {
         this.studentRepo = studentRepo;
         this.teacherRepo = teacherRepo;
-        this.assignmentRepo = assignmentRepo;
         this.courseRepo = courseRepo;
     }
 
@@ -38,10 +36,16 @@ public class CourseController {
 
 
     }
-    @GetMapping("/courses/{id}")
+    @GetMapping("/courses/{id}/assignments")
     public Collection<Assignment> retrieveAssignmentByCourse(@PathVariable Long id){
         Course retrievedCourse = courseRepo.findById(id).get();
         return retrievedCourse.getAssignments();
+    }
+    @PatchMapping("/courses/{id}")
+    public Course addAssignmentToCourse (@PathVariable Long id, @RequestBody Assignment assignment){
+        Course retrievedCourse = courseRepo.findById(id).get();
+        retrievedCourse.addAssignment(assignment);
+        return retrievedCourse;
     }
 }
 

@@ -20,8 +20,6 @@ public class Pouplator implements CommandLineRunner {
     @Autowired
     CourseRepository courseRepo;
     @Autowired
-    AssignmentRepository assignmentRepository;
-    @Autowired
     ConversationRepository conversationRepository;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -45,16 +43,17 @@ public class Pouplator implements CommandLineRunner {
         Course math= new Course("Math",smith,"11:00", Arrays.asList(abdul,hetal,innocent));
         Course english= new Course("English",ashley, "12:00", Arrays.asList(abdul,hetal,innocent));
         Course biology= new Course("bio",bob,"10:00",Arrays.asList(abdul,hetal,innocent));
-        courseRepo.save(math);
-        courseRepo.save(biology);
-        courseRepo.save(english);
+
 
         Assignment mathAssignment= new Assignment("mathAssignment", "homework 2", timestamp.getTime());
         Assignment bioAssignment= new Assignment("bioAssignment", "cells Homework",timestamp.getTime()) ;
         Assignment englishAssignment= new Assignment("englishAssignment","Hamlet reading", timestamp.getTime());
-        assignmentRepository.save(mathAssignment);
-        assignmentRepository.save(englishAssignment);
-        assignmentRepository.save(bioAssignment);
+        math.addAssignment(mathAssignment);
+        english.addAssignment(englishAssignment);
+        biology.addAssignment(bioAssignment);
+        courseRepo.save(math);
+        courseRepo.save(biology);
+        courseRepo.save(english);
 
         Conversation message= new Conversation("homework");
 
