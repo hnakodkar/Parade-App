@@ -99,8 +99,8 @@ displayFooter();
 displayAssignmentView();
 displayChatView();
 
-/*displayUserInfos();
-displayStudentForm();*/
+displayUserInfos();
+displayStudentForm();
 /*displayTeacherForm();
 displayCourseForm();
 displayAssignmentForm();*/

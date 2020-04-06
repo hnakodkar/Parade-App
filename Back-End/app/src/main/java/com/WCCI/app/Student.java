@@ -80,4 +80,19 @@ public class Student {
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "language='" + language + '\'' +
+                ", parentPhone='" + parentPhone + '\'' +
+                ", parentEmail='" + parentEmail + '\'' +
+                ", schoolId='" + schoolId + '\'' +
+                ", parentName='" + parentName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

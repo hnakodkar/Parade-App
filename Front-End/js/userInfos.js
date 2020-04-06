@@ -1,4 +1,5 @@
-const createUserInfosCard = () => {
+
+const createUserInfosCard = (JSONresponse) => {
 
     const container = document.createElement('div');
 
@@ -23,12 +24,12 @@ const createUserInfosCard = () => {
     container.appendChild(infosHolder);
 
     const info1Label = document.createElement('h3');
-    info1Label.innerText = 'Info 1: ';
+    info1Label.innerText = 'Username: ';
     const info1 = document.createElement('span');
-    info1.innerText = 'Info1 Value';
+    info1.innerText = JSONresponse.username; 
     info1Label.append(info1);
     const info2Label = document.createElement('h3');
-    info2Label.innerText = 'Info 2: ';
+    info2Label.innerText = 'Password: ';
     const info2 = document.createElement('span');
     info2.innerText = 'Info2 Value';
     info2Label.append(info2);

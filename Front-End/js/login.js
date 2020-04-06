@@ -1,4 +1,6 @@
-
+import{
+    createUserInfosCard
+} from './userInfos.js';
 
 const createLogin = () => {
 
@@ -31,7 +33,7 @@ const createLogin = () => {
     loginWrapper.appendChild(password);
     loginWrapper.appendChild(passwordInput);
 
-    const chooseData = (usernameInput, passwordInput, loginOption) => {
+    const chooseData = () => {
         const user = {
             "username": usernameInput.value, "password": passwordInput.value
         }
@@ -50,7 +52,7 @@ const createLogin = () => {
             , body: JSON.stringify(user)
         })
         .then(response => response.json())
-        .then(JSONresponse => console.log(JSONresponse))
+        .then(JSONresponse => createUserInfosCard(JSONresponse))
     }
 
     const btnWrapper = document.createElement('div');
@@ -59,7 +61,7 @@ const createLogin = () => {
     loginBtn.innerText = 'Submit';
     loginBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        chooseData(usernameInput, passwordInput, loginOption);
+        chooseData();
     });
     loginWrapper.appendChild(loginOption);
     btnWrapper.appendChild(loginBtn);

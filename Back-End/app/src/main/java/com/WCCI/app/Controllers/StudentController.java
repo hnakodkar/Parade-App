@@ -39,11 +39,12 @@ public class StudentController {
     }
 
     @PostMapping("/login/student")
-    public Student findStudentLogin(@RequestBody String username, String password){
+    public Student findStudentLogin(@RequestBody Student credentials){
         Student chosenStudent = new Student();
         for(Student student: studentRepo.findAll()){
-            if(student.getUsername().equals(username) && student.getPassword().equals(password)) {
-                chosenStudent = student;
+            System.out.println(student);
+            if((student.getUsername() != null) && (student.getUsername().equals(credentials.getUsername())) && student.getPassword().equals(credentials.getPassword())) {
+                return student;
             }
         } return chosenStudent;
     }
