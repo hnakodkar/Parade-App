@@ -24,7 +24,6 @@ public class CourseController {
         return (Collection<Course>) courseRepo.findAll();
     }
 
-
     @PostMapping("/courses")
     public Course addCourse(@RequestBody Course courseToAdd) {
         return courseRepo.save(courseToAdd);
@@ -33,14 +32,14 @@ public class CourseController {
     @GetMapping("/courses/{id}")
     public Course retrieveSingleCourse(@PathVariable Long id) {
         return courseRepo.findById(id).get();
-
-
     }
+
     @GetMapping("/courses/{id}/assignments")
     public Collection<Assignment> retrieveAssignmentByCourse(@PathVariable Long id){
         Course retrievedCourse = courseRepo.findById(id).get();
         return retrievedCourse.getAssignments();
     }
+
     @PatchMapping("/courses/{id}")
     public Course addAssignmentToCourse (@PathVariable Long id, @RequestBody Assignment assignment){
         Course retrievedCourse = courseRepo.findById(id).get();

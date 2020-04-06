@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Component
-public class Pouplator implements CommandLineRunner {
+public class Populator implements CommandLineRunner {
 
     @Autowired
     StudentRepository studentRepo;
@@ -26,7 +26,7 @@ public class Pouplator implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Student abdul = new Student("Abdul");
+        Student abdul = new Student("Abdul", "AbdulParent", "123", "email", "911", "English", "abdul123", "abdul");
         Student hetal = new Student("Hetal");
         Student innocent= new Student("Innocent");
         studentRepo.save(abdul);
@@ -43,7 +43,6 @@ public class Pouplator implements CommandLineRunner {
         Course math= new Course("Math",smith,"11:00", Arrays.asList(abdul,hetal,innocent));
         Course english= new Course("English",ashley, "12:00", Arrays.asList(abdul,hetal,innocent));
         Course biology= new Course("bio",bob,"10:00",Arrays.asList(abdul,hetal,innocent));
-
 
         Assignment mathAssignment= new Assignment("mathAssignment", "homework 2", timestamp.getTime());
         Assignment bioAssignment= new Assignment("bioAssignment", "cells Homework",timestamp.getTime()) ;

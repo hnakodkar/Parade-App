@@ -9,6 +9,7 @@ import java.util.Collection;
 
 @RestController
 public class TeacherController {
+
     private TeacherRepository teacherRepository;
     private StudentRepository studentRepository;
     private CourseRepository courseRepo;
@@ -22,8 +23,8 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers")
-    public Collection<Teacher> retrieveTeachers()
-    {return (Collection<Teacher>) teacherRepository.findAll();}
+    public Collection<Teacher> retrieveTeachers(){
+        return (Collection<Teacher>) teacherRepository.findAll();}
 
     @PostMapping ("/teachers")
     public Teacher addAteacher (@RequestBody Teacher teacherToAdd){
@@ -31,9 +32,7 @@ public class TeacherController {
     }
 
     @GetMapping("/teachers/{id}")
-    public Teacher retrieveSingleTeacher(@PathVariable Long id
-    )
-    {
+    public Teacher retrieveSingleTeacher(@PathVariable Long id) {
         return teacherRepository.findById(id).get();
     }
 }

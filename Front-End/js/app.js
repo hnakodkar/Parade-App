@@ -40,12 +40,12 @@ const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
 
-/*const renderLogin = () => {
+const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
     }
     anchor.appendChild(createLogin());
-}*/
+}
 
 const displayFooter = () => {
 
@@ -68,9 +68,9 @@ const displayStudentForm = () => {
     anchor.appendChild(createStudentForm());
 }
 
-const displayUserInfos = () => {
-
-    anchor.appendChild(createUserInfosCard());
+const displayUserInfos = (JSONresponse) => {
+    // chooseData();
+    anchor.appendChild(createUserInfosCard(JSONresponse));
 }
 
 const displayCourseForm = () => {
@@ -99,16 +99,18 @@ displayFooter();
 displayAssignmentView();
 displayChatView();
 
-/*displayUserInfos();
-displayStudentForm();*/
+// displayUserInfos();
+displayStudentForm();
 /*displayTeacherForm();
 displayCourseForm();
 displayAssignmentForm();*/
 
 
-/*const btn = document.createElement('button');
+const btn = document.createElement('button');
 btn.innerText = 'User Login';
 anchor.appendChild(btn);
 btn.addEventListener('click', () => {
     renderLogin();
-});*/
+});
+
+export {displayUserInfos}
