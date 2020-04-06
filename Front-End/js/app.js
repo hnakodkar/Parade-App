@@ -68,9 +68,9 @@ const displayStudentForm = () => {
     anchor.appendChild(createStudentForm());
 }
 
-const displayUserInfos = () => {
-
-    anchor.appendChild(createUserInfosCard());
+const displayUserInfos = (JSONresponse) => {
+    // chooseData();
+    anchor.appendChild(createUserInfosCard(JSONresponse));
 }
 
 const displayCourseForm = () => {
@@ -99,7 +99,7 @@ displayFooter();
 displayAssignmentView();
 displayChatView();
 
-displayUserInfos();
+// displayUserInfos();
 displayStudentForm();
 /*displayTeacherForm();
 displayCourseForm();
@@ -112,3 +112,5 @@ anchor.appendChild(btn);
 btn.addEventListener('click', () => {
     renderLogin();
 });
+
+export {displayUserInfos}

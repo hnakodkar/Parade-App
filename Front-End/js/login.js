@@ -1,6 +1,9 @@
 import{
     createUserInfosCard
 } from './userInfos.js';
+import {
+    chooseData
+} from './chooseData.js'
 
 const createLogin = () => {
 
@@ -33,27 +36,7 @@ const createLogin = () => {
     loginWrapper.appendChild(password);
     loginWrapper.appendChild(passwordInput);
 
-    const chooseData = () => {
-        const user = {
-            "username": usernameInput.value, "password": passwordInput.value
-        }
-        let chosenData = loginOption.value;
-        let endpoint = "";
-        if (chosenData == "Teacher"){
-            endpoint = "http://localhost:8080/login/teacher";
-        } else if (chosenData == "Student"){
-            endpoint = "http://localhost:8080/login/student";
-        }
-        fetch(endpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }
-            , body: JSON.stringify(user)
-        })
-        .then(response => response.json())
-        .then(JSONresponse => createUserInfosCard(JSONresponse))
-    }
+   
 
     const btnWrapper = document.createElement('div');
     btnWrapper.classList.add('submit-btn');
@@ -61,7 +44,7 @@ const createLogin = () => {
     loginBtn.innerText = 'Submit';
     loginBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        chooseData();
+        chooseData(usernameInput.value, passwordInput.value);
     });
     loginWrapper.appendChild(loginOption);
     btnWrapper.appendChild(loginBtn);

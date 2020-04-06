@@ -1,6 +1,6 @@
 
-const createUserInfosCard = (JSONresponse) => {
-
+const createUserInfosCard = (userResponse) => {
+    console.log(userResponse);
     const container = document.createElement('div');
 
     container.classList.add('user');
@@ -26,7 +26,7 @@ const createUserInfosCard = (JSONresponse) => {
     const info1Label = document.createElement('h3');
     info1Label.innerText = 'Username: ';
     const info1 = document.createElement('span');
-    info1.innerText = JSONresponse.username; 
+    info1.innerText = userResponse.username; 
     info1Label.append(info1);
     const info2Label = document.createElement('h3');
     info2Label.innerText = 'Password: ';
