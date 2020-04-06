@@ -8,23 +8,24 @@ import java.util.Collection;
 
 @Entity
 public class Conversation {
+
     @Id
     @GeneratedValue
     private Long id;
 
     private String content;
 
-   @ManyToMany
+    @ManyToMany
     private Collection<Student>students;
+
     @ManyToMany
     private Collection<Teacher>teachers;
 
     public Conversation (String content ){
         this.content = content;
-
     }
-    public Conversation (){}
 
+    public Conversation (){}
 
     public Long getId() {
         return id;

@@ -1,22 +1,20 @@
 package com.WCCI.app;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Collection;
 
 @Embeddable
 public class Assignment {
-    private String name;
-    private String desription;
-    private Long time;
 
+    private String name;
+    private String description;
+    private Long time;
 
     public Assignment() {}
 
-    public Assignment(String name, String desription, Long time) {
+    public Assignment(String name, String description, Long time) {
         this.name = name;
 
-        this.desription = desription;
+        this.description = description;
         this.time = time;
     }
 
@@ -28,12 +26,12 @@ public class Assignment {
         this.name = name;
     }
 
-    public String getDesription() {
-        return desription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesription(String desription) {
-        this.desription = desription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getTime() {

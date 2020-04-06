@@ -8,9 +8,11 @@ import java.util.HashMap;
 
 @Entity
 public class Course {
+
     @ManyToOne
     private Teacher teacher;
     private String classTime;
+
     @Id
     @GeneratedValue
     private Long id;
@@ -19,7 +21,6 @@ public class Course {
 
     @ManyToMany(mappedBy = "courses")
     private Collection<Student> students;
-
 
     @ElementCollection
     private Collection<Assignment> assignments = new ArrayList<>();
@@ -30,18 +31,21 @@ public class Course {
     public Course(String name){
         this.name = name;
     }
-    public Course(String name, Teacher teacher, String classTime,Collection<Student>students){
+
+    public Course(String name, Teacher teacher, String classTime, Collection<Student>students){
         this.name = name;
         this.classTime = classTime;
         this.teacher = teacher;
     }
+
     public void addAssignment(Assignment assignment){
         assignments.add(assignment);
     }
-    public Collection<Assignment> getAssignments() {
 
+    public Collection<Assignment> getAssignments() {
         return assignments;
     }
+
     public Teacher getTeacher() {
         return teacher;
     }

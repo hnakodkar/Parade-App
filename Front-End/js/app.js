@@ -40,12 +40,12 @@ const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
 
-/*const renderLogin = () => {
+const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
     }
     anchor.appendChild(createLogin());
-}*/
+}
 
 const displayFooter = () => {
 
@@ -106,9 +106,9 @@ displayCourseForm();
 displayAssignmentForm();*/
 
 
-/*const btn = document.createElement('button');
+const btn = document.createElement('button');
 btn.innerText = 'User Login';
 anchor.appendChild(btn);
 btn.addEventListener('click', () => {
     renderLogin();
-});*/
+});

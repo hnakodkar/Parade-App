@@ -5,6 +5,7 @@ import com.WCCI.app.Student;
 import com.WCCI.app.repository.CourseRepository;
 import com.WCCI.app.repository.StudentRepository;
 import com.WCCI.app.repository.TeacherRepository;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -15,15 +16,16 @@ public class StudentController {
     private TeacherRepository teacherRepo;
     private CourseRepository courseRepo;
 
-    public StudentController (StudentRepository studentRepo, TeacherRepository teacherRepo,CourseRepository courseRepo){
+    public StudentController (StudentRepository studentRepo, TeacherRepository teacherRepo, CourseRepository courseRepo){
         this.studentRepo =studentRepo;
         this.teacherRepo = teacherRepo;
         this.courseRepo = courseRepo;
     }
 
     @GetMapping ("/students")
-    public Collection<Student> retrieveStudents()
-    {return (Collection<Student>) studentRepo.findAll();}
+    public Collection<Student> retrieveStudents(){
+        return (Collection<Student>) studentRepo.findAll();
+    }
 
     @GetMapping ("/students/{id}")
     public Student retrieveSingleStudent (@PathVariable Long id){
@@ -36,6 +38,15 @@ public class StudentController {
         return studentRepo.save(studentToAdd);
     }
 
+    @PostMapping("/login/student")
+    public Student findStudentLogin(@RequestBody String username, String password){
+        Student chosenStudent = new Student();
+        for(Student student: studentRepo.findAll()){
+            if(student.getUsername().equals(username) && student.getPassword().equals(password)) {
+                chosenStudent = student;
+            }
+        } return chosenStudent;
+    }
 }
 
 

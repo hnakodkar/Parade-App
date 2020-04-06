@@ -8,8 +8,10 @@ import java.util.HashMap;
 
 @Entity
 public class Student {
+
     @ManyToMany(mappedBy = "students")
     private Collection<Conversation> conversations;
+
     @ManyToMany
     private Collection<Course>courses;
     private String language;
@@ -17,6 +19,9 @@ public class Student {
     private String parentEmail;
     private String schoolId;
     private String parentName;
+    private String username;
+    private String password;
+
     @Id
     @GeneratedValue
     private Long id;
@@ -27,16 +32,17 @@ public class Student {
     public Student(){}
     public Student(String name){
         this.name = name;
-
     }
-    public Student(String name,  String parentName, String schoolId, String parentEmail, String parentPhone, String language){
+
+    public Student(String name,  String parentName, String schoolId, String parentEmail, String parentPhone, String language, String username, String password){
         this.name = name;
         this.parentName = parentName;
         this.schoolId = schoolId;
         this.parentEmail = parentEmail;
         this.parentPhone = parentPhone;
         this.language = language;
-
+        this.username = username;
+        this.password = password;
     }
 
     public String getName() {
@@ -65,5 +71,13 @@ public class Student {
 
     public Long getId() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
