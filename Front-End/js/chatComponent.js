@@ -54,6 +54,49 @@
         const submitBtn = document.createElement('button');
         submitBtn.innerText = 'Send';
 
+        const messageContent = () => {
+            const msgWrapper = document.createElement('div');
+            msgWrapper.classList.add('content-body');
+            const message = document.createElement('div');
+            message.innerText = 'message body';
+            const timeStamp = document.createElement('div');
+            timeStamp.innerText = new Date().toLocaleString();
+            msgWrapper.appendChild(message, timeStamp);
+            return msgWrapper;
+        }
+
+
+
+
+        const sendMessage = () => {
+
+            if (msgInput != '') {
+
+
+
+
+
+            }
+
+
+        }
+
+
+
+
+        submitBtn.addEventListener('click', (e) => {
+
+            e.preventDefault();
+
+            sendMessage();
+
+        });
+
+
+
+
+
+
         sendingBtnWrapper.appendChild(submitBtn);
         inputWrapper.appendChild(msgInput);
         chatFooter.appendChild(inputWrapper);
