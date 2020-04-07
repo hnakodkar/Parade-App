@@ -1,14 +1,14 @@
-import{
+import {
     createUserInfosCard
 } from './userInfos.js';
 import {
-    chooseData
-} from './chooseData.js'
+    requestingLogingInfos
+} from './requestingLoginInfos.js';
 
 const createLogin = () => {
 
     const loginOption = document.createElement('select');
-    loginOption.innerText = 'Choose Teacher or Student View'
+    loginOption.innerText = 'Choose Teacher or Student View';
     const teacherChoice = document.createElement('option');
     teacherChoice.setAttribute('value', 'Teacher');
     teacherChoice.innerText = 'Teacher';
@@ -36,7 +36,7 @@ const createLogin = () => {
     loginWrapper.appendChild(password);
     loginWrapper.appendChild(passwordInput);
 
-   
+
 
     const btnWrapper = document.createElement('div');
     btnWrapper.classList.add('submit-btn');
@@ -44,7 +44,7 @@ const createLogin = () => {
     loginBtn.innerText = 'Submit';
     loginBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        chooseData(usernameInput.value, passwordInput.value);
+        requestingLogingInfos(usernameInput.value, passwordInput.value);
     });
     loginWrapper.appendChild(loginOption);
     btnWrapper.appendChild(loginBtn);
