@@ -16,7 +16,7 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     private Collection<Course> courses;
 
-    @ManyToMany(mappedBy = "teachers")
+    @OneToMany(mappedBy = "teacher")
     private Collection<Conversation>conversations;
 
     @Id

@@ -54,7 +54,7 @@ public class Populator implements CommandLineRunner {
         courseRepo.save(biology);
         courseRepo.save(english);
 
-        Conversation message= new Conversation("homework");
+       // Conversation message= new Conversation("homework");
 
 
     }
