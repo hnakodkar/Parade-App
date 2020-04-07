@@ -1,29 +1,36 @@
 package com.WCCI.app;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+
 public class Conversation {
 
     @Id
     @GeneratedValue
     private Long id;
+     @ElementCollection
+    private Collection<String> content = new ArrayList<>();
 
-    private String content;
 
-    @ManyToMany
-    private Collection<Student>students;
 
-    @ManyToMany
-    private Collection<Teacher>teachers;
+    @ManyToOne
+    private Student student;
 
-    public Conversation (String content ){
-        this.content = content;
+    @ManyToOne
+    private Teacher teacher;
+
+    public Conversation  (Collection<String> content,Teacher teacher, Student student) {
+
+        this.content= content;
+        this.student= student;
+        this.teacher=teacher;
     }
+
 
     public Conversation (){}
 
@@ -31,7 +38,17 @@ public class Conversation {
         return id;
     }
 
-    public String getContent() {
+    public Collection <String> getContent() {
         return content;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+
+
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }

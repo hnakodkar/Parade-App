@@ -9,7 +9,7 @@ import java.util.HashMap;
 @Entity
 public class Student {
 
-    @ManyToMany(mappedBy = "students")
+    @OneToMany (mappedBy = "student")
     private Collection<Conversation> conversations;
 
     @ManyToMany
