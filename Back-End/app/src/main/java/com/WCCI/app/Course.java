@@ -22,12 +22,12 @@ public class Course {
     private String name;
 
     @ManyToMany(mappedBy = "courses")
-    private Collection<Student> students;
+    private Collection<Student> students = new ArrayList<>();
 
     @ElementCollection
     private Collection<Assignment> assignments = new ArrayList<>();
      @ElementCollection
-    private Collection<Announcement> announcements;
+    private Collection<Announcement> announcements = new ArrayList<>();;
 
     public Course(){}
     public Course(String name){
@@ -38,6 +38,7 @@ public class Course {
         this.name = name;
         this.classTime = classTime;
         this.teacher = teacher;
+        this.students = students;
     }
     public Collection<Announcement> getAnnouncements (){
         return announcements;

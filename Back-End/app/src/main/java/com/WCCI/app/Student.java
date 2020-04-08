@@ -10,10 +10,10 @@ import java.util.HashMap;
 public class Student {
 
     @OneToMany (mappedBy = "student")
-    private Collection<Conversation> conversations;
+    private Collection<Conversation> conversations = new ArrayList<>();
 
     @ManyToMany
-    private Collection<Course>courses;
+    private Collection<Course> courses = new ArrayList<>();
     private String language;
     private String parentPhone;
     private String parentEmail;
@@ -43,6 +43,7 @@ public class Student {
         this.language = language;
         this.username = username;
         this.password = password;
+
     }
 
     public String getName() {
