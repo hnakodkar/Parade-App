@@ -29,9 +29,8 @@ public class Teacher {
         this.name = name;
     }
 
-    public Teacher (String name, Long id, String schoolId, String email, String phone, String username, String password){
+    public Teacher (String name, String schoolId, String email, String phone, String username, String password){
         this.name = name;
-        this.id = id;
         this.schoolId = schoolId;
         this.email = email;
         this.phone = phone;
