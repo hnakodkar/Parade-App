@@ -3,8 +3,7 @@ import {
 } from './app.js';
 
 const requestingLogingInfos = (usernameValue, passwordValue) => {
-    // usernameValue = document.querySelector('.user-name')
-    // passwordValue = document.querySelector('.user-password')
+
     const user = {
         "username": usernameValue,
         "password": passwordValue
@@ -25,6 +24,8 @@ const requestingLogingInfos = (usernameValue, passwordValue) => {
         })
         .then(response => response.json())
         .then(JSONresponse => displayUserInfos(JSONresponse))
+        .catch(err => console.error(err));
+
 }
 
 export {

@@ -1,5 +1,5 @@
 const createUserInfosCard = (userResponse) => {
-    console.log(userResponse);
+    //console.log(userResponse);
     const container = document.createElement('div');
 
     container.classList.add('user');
@@ -12,7 +12,7 @@ const createUserInfosCard = (userResponse) => {
 
     const nameHolder = document.createElement('div');
     const name = document.createElement('h3');
-    name.classList.add('user-name')
+    name.classList.add('user-name');
     name.innerText = userResponse.name;
     nameHolder.appendChild(name);
     const infosHolder = document.createElement('div');

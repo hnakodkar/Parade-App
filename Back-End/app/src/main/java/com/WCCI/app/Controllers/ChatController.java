@@ -38,10 +38,10 @@ public class ChatController {
     }
 
 
-    @PatchMapping("/conversations/{id}/message")
-    public Conversation updatingMessage(@RequestBody Conversation conversation) {
-
-    }
+//    @PatchMapping("/conversations/{id}/message")
+//    public Conversation updatingMessage(@RequestBody Conversation conversation) {
+//
+//    }
 
 
 }
