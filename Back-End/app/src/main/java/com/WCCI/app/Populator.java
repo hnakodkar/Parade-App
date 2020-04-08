@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 @Component
 public class Populator implements CommandLineRunner {
@@ -33,7 +34,7 @@ public class Populator implements CommandLineRunner {
         studentRepo.save(hetal);
         studentRepo.save(innocent);
 
-        Teacher smith= new Teacher("MrSmith");
+        Teacher smith= new Teacher("MrSmith", "123","smith@school.com","614883838","SweatSchool","smith123");
         Teacher ashley= new Teacher("MissAshley");
         Teacher bob= new Teacher("Bob");
         teacherRepo.save(smith);
@@ -54,7 +55,8 @@ public class Populator implements CommandLineRunner {
         courseRepo.save(biology);
         courseRepo.save(english);
 
-       // Conversation message= new Conversation("homework");
+        Conversation message= new Conversation(Collections.singletonList("homework"),smith,hetal);
+        conversationRepository.save(message);
 
 
     }

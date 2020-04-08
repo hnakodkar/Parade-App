@@ -2,6 +2,7 @@ package com.WCCI.app;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -14,10 +15,10 @@ public class Teacher {
     private String password;
 
     @OneToMany(mappedBy = "teacher")
-    private Collection<Course> courses;
+    private Collection<Course> courses =  new ArrayList<>();;
 
     @OneToMany(mappedBy = "teacher")
-    private Collection<Conversation>conversations;
+    private Collection<Conversation>conversations =  new ArrayList<>();;
 
     @Id
     @GeneratedValue
@@ -27,11 +28,10 @@ public class Teacher {
 
     public Teacher(String name){
         this.name = name;
-    }
+       }
 
-    public Teacher (String name, Long id, String schoolId, String email, String phone, String username, String password){
+    public Teacher (String name, String schoolId, String email, String phone, String username, String password){
         this.name = name;
-        this.id = id;
         this.schoolId = schoolId;
         this.email = email;
         this.phone = phone;

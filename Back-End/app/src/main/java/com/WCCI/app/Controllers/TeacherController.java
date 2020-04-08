@@ -26,6 +26,7 @@ public class TeacherController {
     public Collection<Teacher> retrieveTeachers(){
         return (Collection<Teacher>) teacherRepository.findAll();}
 
+
     @PostMapping ("/teachers")
     public Teacher addAteacher (@RequestBody Teacher teacherToAdd){
         return teacherRepository.save(teacherToAdd);
@@ -35,4 +36,16 @@ public class TeacherController {
     public Teacher retrieveSingleTeacher(@PathVariable Long id) {
         return teacherRepository.findById(id).get();
     }
+
+    @PostMapping("/login/teacher")
+    public Teacher findTeacherLogin(@RequestBody Teacher credentials){
+        Teacher chosenTeacher = new Teacher();
+        for(Teacher  teacher: teacherRepository.findAll()){
+            System.out.println(teacher);
+            if((teacher.getUsername() != null) && (teacher.getUsername().equals(credentials.getUsername())) && teacher.getPassword().equals(credentials.getPassword())) {
+                return teacher;
+            }
+        } return chosenTeacher;
+    }
 }
+

@@ -10,6 +10,9 @@ import com.WCCI.app.repository.StudentRepository;
 import com.WCCI.app.repository.TeacherRepository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.AbstractDocument;
+import java.util.Collection;
+
 @RestController
 public class ChatController {
     private StudentRepository studentRepo;
@@ -36,12 +39,22 @@ public class ChatController {
         return retrieveConversation;
 
     }
+    @GetMapping("/conversations")
+    public Collection<Conversation> getAllConversations (){
+        return (Collection<Conversation>) conversationRepo.findAll();
+    }
 
 
-//    @PatchMapping("/conversations/{id}/message")
-//    public Conversation updatingMessage(@RequestBody Conversation conversation) {
-//
-//    }
+
+    @PatchMapping("/conversations/{id}")
+    public Conversation updatingMessage(@PathVariable Long id,  @RequestBody String contentToAdd) {
+        Conversation conversation = conversationRepo.findById(id).get();
+        Collection<String>conversationsupdate = conversation.getContent();
+        conversationsupdate.add(contentToAdd);
+        conversationRepo.save(conversation);
+        return conversation;
+
+    }
 
 
 }
