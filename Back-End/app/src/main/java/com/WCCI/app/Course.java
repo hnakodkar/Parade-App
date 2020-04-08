@@ -1,10 +1,12 @@
 package com.WCCI.app;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class Course {
@@ -24,8 +26,8 @@ public class Course {
 
     @ElementCollection
     private Collection<Assignment> assignments = new ArrayList<>();
-
-//    private HashMap<Timestamp, String> announcements;
+     @ElementCollection
+    private Collection<Announcement> announcements;
 
     public Course(){}
     public Course(String name){
@@ -37,7 +39,10 @@ public class Course {
         this.classTime = classTime;
         this.teacher = teacher;
     }
-
+    public Collection<Announcement> getAnnouncements (){
+        return announcements;
+    }
+    public void  addAnnouncement(Announcement announcement){ announcements.add(announcement);}
     public void addAssignment(Assignment assignment){
         assignments.add(assignment);
     }

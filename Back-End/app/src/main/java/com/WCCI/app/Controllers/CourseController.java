@@ -1,11 +1,13 @@
 package com.WCCI.app.Controllers;
 
+import com.WCCI.app.Announcement;
 import com.WCCI.app.Assignment;
 import com.WCCI.app.Course;
 import com.WCCI.app.repository.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Map;
 
 @RestController
 public class CourseController {
@@ -44,6 +46,20 @@ public class CourseController {
     public Course addAssignmentToCourse (@PathVariable Long id, @RequestBody Assignment assignment){
         Course retrievedCourse = courseRepo.findById(id).get();
         retrievedCourse.addAssignment(assignment);
+        return retrievedCourse;
+    }
+
+    @GetMapping("/courses/{id}/announcement")
+    public Map<Announcement> getAnnouncements(@PathVariable Long id ){
+        Course retrievedCourse = courseRepo.findById(id).get();
+        return retrievedCourse.getAnnouncements();
+    }
+
+    @PatchMapping("/courses/{id}/announcements")
+    public Course addAnnoucementToCourse(@PathVariable Long id, @RequestBody  Announcement announcement){
+        Course retrievedCourse= courseRepo.findById(id).get();
+        retrievedCourse.getAnnouncements().put(announcement.getTimestamp(), announcement.getContent());
+        courseRepo.save(retrievedCourse);
         return retrievedCourse;
     }
 }
