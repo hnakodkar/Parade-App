@@ -45,6 +45,7 @@ public class ChatController {
     }
 
 
+
     @PatchMapping("/conversations/{id}")
     public Conversation updatingMessage(@PathVariable Long id,  @RequestBody String contentToAdd) {
         Conversation conversation = conversationRepo.findById(id).get();
