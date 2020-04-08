@@ -49,16 +49,16 @@ public class CourseController {
         return retrievedCourse;
     }
 
-    @GetMapping("/courses/{id}/announcement")
-    public Map<Announcement> getAnnouncements(@PathVariable Long id ){
+    @GetMapping("/courses/{id}/announcements")
+    public Collection<Announcement> getAnnouncements(@PathVariable Long id ){
         Course retrievedCourse = courseRepo.findById(id).get();
         return retrievedCourse.getAnnouncements();
     }
 
     @PatchMapping("/courses/{id}/announcements")
-    public Course addAnnoucementToCourse(@PathVariable Long id, @RequestBody  Announcement announcement){
+    public Course addAnnouncementToCourse(@PathVariable Long id, @RequestBody  Announcement announcement){
         Course retrievedCourse= courseRepo.findById(id).get();
-        retrievedCourse.getAnnouncements().put(announcement.getTimestamp(), announcement.getContent());
+        retrievedCourse.getAnnouncements().add(announcement);
         courseRepo.save(retrievedCourse);
         return retrievedCourse;
     }
