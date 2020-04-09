@@ -26,7 +26,8 @@ public class Course {
 
     @ElementCollection
     private Collection<Assignment> assignments = new ArrayList<>();
-     @ElementCollection
+
+    @ElementCollection
     private Collection<Announcement> announcements = new ArrayList<>();;
 
     public Course(){}
@@ -40,10 +41,15 @@ public class Course {
         this.teacher = teacher;
         this.students = students;
     }
+
     public Collection<Announcement> getAnnouncements (){
         return announcements;
     }
-    public void  addAnnouncement(Announcement announcement){ announcements.add(announcement);}
+
+    public void addAnnouncement(Announcement announcement){
+        announcements.add(announcement);
+    }
+
     public void addAssignment(Assignment assignment){
         assignments.add(assignment);
     }
@@ -66,6 +72,10 @@ public class Course {
 
     public String getName() {
         return name;
+    }
+
+    public Collection<Student> getStudents() {
+        return students;
     }
 
     @Override

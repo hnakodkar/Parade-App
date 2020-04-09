@@ -4,6 +4,7 @@ package com.WCCI.app;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Teacher {
@@ -18,7 +19,7 @@ public class Teacher {
     private Collection<Course> courses =  new ArrayList<>();;
 
     @OneToMany(mappedBy = "teacher")
-    private Collection<Conversation>conversations =  new ArrayList<>();;
+    private Collection<Conversation> conversations =  new ArrayList<>();;
 
     @Id
     @GeneratedValue
@@ -67,5 +68,24 @@ public class Teacher {
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Teacher teacher = (Teacher) o;
+        return Objects.equals(phone, teacher.phone) &&
+                Objects.equals(email, teacher.email) &&
+                Objects.equals(schoolId, teacher.schoolId) &&
+                Objects.equals(username, teacher.username) &&
+                Objects.equals(password, teacher.password) &&
+                Objects.equals(id, teacher.id) &&
+                Objects.equals(name, teacher.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phone, email, schoolId, username, password, id, name);
     }
 }

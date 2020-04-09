@@ -13,10 +13,8 @@ public class Conversation {
     @Id
     @GeneratedValue
     private Long id;
-     @ElementCollection
+    @ElementCollection
     private Collection<String> content = new ArrayList<>();
-
-
 
     @ManyToOne
     private Student student;
@@ -25,14 +23,12 @@ public class Conversation {
     private Teacher teacher;
 
     public Conversation  (Collection<String> content,Teacher teacher, Student student) {
-
         this.content= content;
         this.student= student;
         this.teacher=teacher;
     }
 
-
-    public Conversation (){}
+    public Conversation(){}
 
     public Long getId() {
         return id;
@@ -44,8 +40,6 @@ public class Conversation {
 
     public Teacher getTeacher() {
         return teacher;
-
-
     }
 
     public Student getStudent() {

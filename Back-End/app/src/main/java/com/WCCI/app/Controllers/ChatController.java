@@ -25,8 +25,6 @@ public class ChatController {
         this.courseRepo = courseRepo;
         this.teacherRepo = teacherRepo;
         this.conversationRepo = conversationRepo;
-
-
     }
 
     @PostMapping("/conversations")
@@ -37,24 +35,19 @@ public class ChatController {
         Conversation newConversation = new Conversation(conversation.getContent(), retrieveTeacher, retrieveStudent);
         Conversation retrieveConversation = conversationRepo.save(newConversation);
         return retrieveConversation;
-
     }
+
     @GetMapping("/conversations")
     public Collection<Conversation> getAllConversations (){
         return (Collection<Conversation>) conversationRepo.findAll();
     }
 
-
-
     @PatchMapping("/conversations/{id}")
-    public Conversation updatingMessage(@PathVariable Long id,  @RequestBody String contentToAdd) {
+    public Conversation updatingMessage(@PathVariable Long id, @RequestBody String contentToAdd){
         Conversation conversation = conversationRepo.findById(id).get();
-        Collection<String>conversationsupdate = conversation.getContent();
-        conversationsupdate.add(contentToAdd);
+        Collection<String>conversationToUpdate = conversation.getContent();
+        conversationToUpdate.add(contentToAdd);
         conversationRepo.save(conversation);
         return conversation;
-
     }
-
-
 }

@@ -14,7 +14,6 @@ public class Announcement {
 
     public Announcement(){}
 
-
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }

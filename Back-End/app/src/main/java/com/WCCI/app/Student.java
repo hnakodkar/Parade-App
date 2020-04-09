@@ -1,10 +1,7 @@
 package com.WCCI.app;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 @Entity
 public class Student {
@@ -30,6 +27,7 @@ public class Student {
    // private HashMap < Course,int> grades;
 
     public Student(){}
+
     public Student(String name){
         this.name = name;
     }
@@ -43,7 +41,6 @@ public class Student {
         this.language = language;
         this.username = username;
         this.password = password;
-
     }
 
     public String getName() {
@@ -95,5 +92,34 @@ public class Student {
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public Collection<Conversation> getConversations() {
+        return conversations;
+    }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(language, student.language) &&
+                Objects.equals(parentPhone, student.parentPhone) &&
+                Objects.equals(parentEmail, student.parentEmail) &&
+                Objects.equals(schoolId, student.schoolId) &&
+                Objects.equals(parentName, student.parentName) &&
+                Objects.equals(username, student.username) &&
+                Objects.equals(password, student.password) &&
+                Objects.equals(id, student.id) &&
+                Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(language, parentPhone, parentEmail, schoolId, parentName, username, password, id, name);
     }
 }

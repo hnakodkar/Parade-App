@@ -26,7 +26,6 @@ public class TeacherController {
     public Collection<Teacher> retrieveTeachers(){
         return (Collection<Teacher>) teacherRepository.findAll();}
 
-
     @PostMapping ("/teachers")
     public Teacher addAteacher (@RequestBody Teacher teacherToAdd){
         return teacherRepository.save(teacherToAdd);
