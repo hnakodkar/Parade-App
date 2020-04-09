@@ -39,7 +39,7 @@ import {
 const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
-//! let currentUser = '';
+let currentUser;
 const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
@@ -71,9 +71,10 @@ const displayStudentForm = () => {
 
 
 const displayUserInfos = (JSONresponse) => {
-    console.log(JSONresponse);
+    currentUser=JSONresponse;
 
-    anchor.appendChild(createUserInfosCard(JSONresponse));
+   // anchor.appendChild(createUserInfosCard(JSONresponse));
+   anchor.appendChild(createChatView());
 
 }
 
@@ -103,7 +104,7 @@ const displayAssignmentView = () => {
 displayHeader();
 displayFooter();
 displayAssignmentView();
-displayChatView();
+//displayChatView();
 
 // displayUserInfos();
 displayStudentForm();
@@ -120,5 +121,5 @@ btn.addEventListener('click', () => {
 });
 
 export {
-    displayUserInfos
+    displayUserInfos, currentUser
 }

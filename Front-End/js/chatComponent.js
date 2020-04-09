@@ -1,3 +1,5 @@
+import{currentUser}
+from "./app.js";
 const createChatView = () => {
     const chatViewWrapper = document.createElement('section');
     chatViewWrapper.classList.add('chat');
@@ -9,7 +11,7 @@ const createChatView = () => {
     chatTitle.innerText = 'CHAT';
     chatHeader.appendChild(chatTitle);
     const chatBody = document.createElement('div');
-    chatBody.classList.add('chat-body');
+    chatBody.classList.add('chat-body');        
     const msgList = document.createElement('ul');
     chatBody.appendChild(msgList);
     const teacherNamewrapper = document.createElement('div');
@@ -17,18 +19,10 @@ const createChatView = () => {
     teacherNamewrapper.appendChild(teacherName);
 
 
-
-
-    /*  let endpoint = '';
-
-      if (currentUser.has('parentPhone')) {
-          endpoint = 'http://localhost:8080/teachers';
-      } else {
-          endpoint = 'http://localhost:8080/students';
-      }*/
-
     let users;
-    fetch(true ? 'http://localhost:8080/teachers' : 'http://localhost:8080/students')
+    console.log(currentUser);
+
+    fetch(currentUser.parentPhone ? 'http://localhost:8080/teachers' : 'http://localhost:8080/students')
         .then(response => response.json())
         .then(res => {
             users = res;
@@ -44,14 +38,10 @@ const createChatView = () => {
         .catch(err => console.error(err));
 
 
-
-
     const selctTeacherwrapper = document.createElement('div');
     const teacherLabel = document.createElement('p');
     teacherLabel.innerText = 'Select the User';
     const teacherInput = document.createElement('select');
-
-
 
     selctTeacherwrapper.appendChild(teacherLabel);
     selctTeacherwrapper.appendChild(teacherInput);
@@ -97,29 +87,23 @@ const createChatView = () => {
 
             }
             fetch('http://localhost:8080/conversations', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(msgBody)
-                })
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(msgBody)
+            })
                 .then(response => response.json())
                 .then(JSONresponse => {
                     msgList.appendChild(messageContent(JSONresponse.content));
                 })
                 .catch(err => console.error(err));
 
-
-
-
         }
     };
 
     submitBtn.addEventListener('click', (e) => {
-
-
         e.preventDefault();
-
         sendMessage();
     });
 
