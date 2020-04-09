@@ -29,12 +29,12 @@ public class ChatController {
 
     @PostMapping("/conversations")
     public Conversation createConversation(@RequestBody Conversation conversation) {
-        Teacher retrieveTeacher = teacherRepo.findById(conversation.getTeacher().getId()).get();
-        Student retrieveStudent = studentRepo.findById(conversation.getStudent().getId()).get();
+        Teacher retrievedTeacher = teacherRepo.findById(conversation.getTeacher().getId()).get();
+        Student retrievedStudent = studentRepo.findById(conversation.getStudent().getId()).get();
 
-        Conversation newConversation = new Conversation(conversation.getContent(), retrieveTeacher, retrieveStudent);
-        Conversation retrieveConversation = conversationRepo.save(newConversation);
-        return retrieveConversation;
+        Conversation newConversation = new Conversation(conversation.getContent(), retrievedTeacher, retrievedStudent);
+        Conversation retrievedConversation = conversationRepo.save(newConversation);
+        return retrievedConversation;
     }
 
     @GetMapping("/conversations")
@@ -43,7 +43,7 @@ public class ChatController {
     }
 
     @PatchMapping("/conversations/{id}")
-    public Conversation updatingMessage(@PathVariable Long id, @RequestBody String contentToAdd){
+    public Conversation updateMessage(@PathVariable Long id, @RequestBody String contentToAdd){
         Conversation conversation = conversationRepo.findById(id).get();
         Collection<String>conversationToUpdate = conversation.getContent();
         conversationToUpdate.add(contentToAdd);
