@@ -71,10 +71,10 @@ const displayStudentForm = () => {
 
 
 const displayUserInfos = (JSONresponse) => {
-    currentUser=JSONresponse;
+    currentUser = JSONresponse;
 
-   // anchor.appendChild(createUserInfosCard(JSONresponse));
-   anchor.appendChild(createChatView());
+    // anchor.appendChild(createUserInfosCard(JSONresponse));
+    anchor.appendChild(createChatView());
 
 }
 
@@ -121,5 +121,6 @@ btn.addEventListener('click', () => {
 });
 
 export {
-    displayUserInfos, currentUser
+    displayUserInfos,
+    currentUser
 }

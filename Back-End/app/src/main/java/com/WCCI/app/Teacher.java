@@ -1,6 +1,8 @@
 package com.WCCI.app;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,10 +18,12 @@ public class Teacher {
     private String password;
 
     @OneToMany(mappedBy = "teacher")
-    private Collection<Course> courses =  new ArrayList<>();;
+    private Collection<Course> courses =  new ArrayList<>();
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "teacher")
-    private Collection<Conversation> conversations =  new ArrayList<>();;
+    private Collection<Conversation> conversations =  new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -69,7 +73,9 @@ public class Teacher {
     public String getUsername() {
         return username;
     }
-
+    public Collection<Conversation> getConversations() {
+        return conversations;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

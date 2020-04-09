@@ -17,7 +17,7 @@ public class Conversation {
     @ElementCollection
     private Collection<String> content = new ArrayList<>();
 
-    @JsonIgnore
+
     @ManyToOne
     private Student student;
 
@@ -34,6 +34,15 @@ public class Conversation {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Conversation{" +
+                "id=" + id +
+                ", student=" + student +
+                ", teacher=" + teacher +
+                '}';
     }
 
     public Collection <String> getContent() {

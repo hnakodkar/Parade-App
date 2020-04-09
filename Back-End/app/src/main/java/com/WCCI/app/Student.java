@@ -1,11 +1,13 @@
 package com.WCCI.app;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 public class Student {
-
+    @JsonIgnore
     @OneToMany (mappedBy = "student")
     private Collection<Conversation> conversations = new ArrayList<>();
 

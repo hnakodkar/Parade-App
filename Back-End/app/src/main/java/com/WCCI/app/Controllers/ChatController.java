@@ -29,6 +29,7 @@ public class ChatController {
 
     @PostMapping("/conversations")
     public Conversation createConversation(@RequestBody Conversation conversation) {
+        System.out.println(conversation);
         Teacher retrievedTeacher = teacherRepo.findById(conversation.getTeacher().getId()).get();
         Student retrievedStudent = studentRepo.findById(conversation.getStudent().getId()).get();
 

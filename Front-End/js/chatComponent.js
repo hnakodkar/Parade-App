@@ -1,4 +1,6 @@
-import{currentUser}
+import {
+    currentUser
+}
 from "./app.js";
 const createChatView = () => {
     const chatViewWrapper = document.createElement('section');
@@ -11,7 +13,7 @@ const createChatView = () => {
     chatTitle.innerText = 'CHAT';
     chatHeader.appendChild(chatTitle);
     const chatBody = document.createElement('div');
-    chatBody.classList.add('chat-body');        
+    chatBody.classList.add('chat-body');
     const msgList = document.createElement('ul');
     chatBody.appendChild(msgList);
     const teacherNamewrapper = document.createElement('div');
@@ -26,6 +28,7 @@ const createChatView = () => {
         .then(response => response.json())
         .then(res => {
             users = res;
+
             for (let i = 0; i < users.length; i++) {
                 const optionElement = document.createElement('option');
 
@@ -75,26 +78,37 @@ const createChatView = () => {
 
     const sendMessage = () => {
         if (msgInput.value != '') {
-        
-            const msgBody = {
-                "teacher": {
-                    "id": teacherInput.value
-                },
-                "student": {
-                    "id": currentUser.id
-                },
-                "content": [msgInput.value]
 
-            }
+            const msgBody = currentUser.parentPhone ? {
+                    "teacher": {
+                        "id": teacherInput.value
+                    },
+                    "student": {
+                        "id": currentUser.id
+                    },
+                    "content": [msgInput.value]
+
+                } :
+                {
+                    "teacher": {
+                        "id": currentUser.id
+                    },
+                    "student": {
+                        "id": teacherInput.value
+                    },
+                    "content": [msgInput.value]
+
+                };
             fetch('http://localhost:8080/conversations', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(msgBody)
-            })
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(msgBody)
+                })
                 .then(response => response.json())
                 .then(JSONresponse => {
+                    console.log(JSONresponse);
                     msgList.appendChild(messageContent(JSONresponse.content));
                 })
                 .catch(err => console.error(err));
@@ -103,6 +117,7 @@ const createChatView = () => {
     };
 
     submitBtn.addEventListener('click', (e) => {
+
         e.preventDefault();
         sendMessage();
     });
