@@ -1,5 +1,6 @@
 package com.WCCI.app;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Conversation {
     @ElementCollection
     private Collection<String> content = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToOne
     private Student student;
 

@@ -75,13 +75,13 @@ const createChatView = () => {
 
     const sendMessage = () => {
         if (msgInput.value != '') {
-
+        
             const msgBody = {
                 "teacher": {
                     "id": teacherInput.value
                 },
                 "student": {
-                    "id": 1
+                    "id": currentUser.id
                 },
                 "content": [msgInput.value]
 
