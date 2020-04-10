@@ -67,19 +67,6 @@ const displayStudentForm = () => {
 
     anchor.appendChild(createStudentForm());
 }
-
-
-
-const displayUserInfos = (JSONresponse) => {
-    currentUser = JSONresponse;
-
-    // anchor.appendChild(createUserInfosCard(JSONresponse));
-    anchor.appendChild(createChatView());
-
-}
-
-
-
 const displayCourseForm = () => {
 
     anchor.appendChild(createCourseForm());
@@ -99,28 +86,53 @@ const displayAssignmentView = () => {
 
     anchor.appendChild(createAssignmentView());
 }
+const renderLoginView = () => {
+    displayHeader();
+    displayFooter();
+    const btn = document.createElement('button');
+    btn.innerText = 'User Login';
+    anchor.appendChild(btn);
+    btn.addEventListener('click', () => {
+        renderLogin();
+    });
+}
+
+const renderTeacherView = () => {
+
+    // displayHeader();
+    // displayFooter();
+    displayAssignmentView();
+   
+    displayStudentForm();
+}
+
+const displayTeacherInfo = (JSONresponse) => {
+    currentUser = JSONresponse;
+    renderTeacherView();
+     
+
+    // anchor.appendChild(createUserInfosCard(JSONresponse));
+    anchor.appendChild(createChatView());
+
+}
+
+const displayStudentInfo = (JSONresponse) =>{
+    currentUser = JSONresponse;
+    renderStudentView();
+}
 
 
-displayHeader();
-displayFooter();
-displayAssignmentView();
-//displayChatView();
+renderLoginView();
 
-// displayUserInfos();
-displayStudentForm();
+ //displayChatView();
+
+    // displayUserInfos();
 /*displayTeacherForm();
 displayCourseForm();
 displayAssignmentForm();*/
 
-
-const btn = document.createElement('button');
-btn.innerText = 'User Login';
-anchor.appendChild(btn);
-btn.addEventListener('click', () => {
-    renderLogin();
-});
-
 export {
-    displayUserInfos,
-    currentUser
+    currentUser,
+    displayTeacherInfo,
+    displayStudentInfo
 }
