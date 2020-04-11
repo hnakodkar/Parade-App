@@ -1,5 +1,3 @@
-
-
 import {
     currentUser
 }
@@ -51,6 +49,8 @@ const createChatView = () => {
     const sendingBtnWrapper = document.createElement('div');
     const submitBtn = document.createElement('button');
     submitBtn.innerText = 'Send';
+
+
     const messageContent = (msg) => {
         const msgWrapper = document.createElement('li');
         msgWrapper.classList.add('content-body');
@@ -87,14 +87,19 @@ const createChatView = () => {
             };
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
-                .then(conversations.forEach(conversation => {
+
+                .then(conversations => conversations.forEach(conversation => {
+
+                    console.log(conversations);
                     if (conversation.teacher.id === teacherInput.value && conversation.student.id === currentUser.id) {
                         fetch(`http://localhost:8080/conversations/${conversation.id}`, {
+
                                 method: 'PATCH',
                                 headers: {
                                     "Content-Type": "application/json"
                                 },
-                                body: JSON.stringify(newMsg)
+                                body: msgInput.value
+
                             })
                             .then(response => response.json())
                             .then(response => {
@@ -116,24 +121,33 @@ const createChatView = () => {
                             .catch(err => console.error(err));
                     }
                 })).catch(err => console.error(err));
-            submitBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                sendMessage();
-                msgInput.value = '';
-            });
-            sendingBtnWrapper.appendChild(submitBtn);
-            inputWrapper.appendChild(msgInput);
-            chatFooter.appendChild(inputWrapper);
-            chatFooter.appendChild(sendingBtnWrapper);
-            chatViewWrapper.appendChild(chatHeader);
-            chatViewWrapper.appendChild(chatBody);
-            chatViewWrapper.appendChild(chatFooter);
+
+
+
+
+
             teacherInput.addEventListener('change', (e) => {
                 teacherName.innerText = e.target.options[teacherInput.selectedIndex].text;
             });
-            
+
+        } else {
+            console.log("you need to enter a message");
         }
     }
+
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        sendMessage();
+        msgInput.value = '';
+    });
+
+    sendingBtnWrapper.appendChild(submitBtn);
+    inputWrapper.appendChild(msgInput);
+    chatFooter.appendChild(inputWrapper);
+    chatFooter.appendChild(sendingBtnWrapper);
+    chatViewWrapper.appendChild(chatHeader);
+    chatViewWrapper.appendChild(chatBody);
+    chatViewWrapper.appendChild(chatFooter);
     return chatViewWrapper;
 }
 
