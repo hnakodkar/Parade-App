@@ -24,12 +24,12 @@ const requestingLogingInfos = (usernameValue, passwordValue) => {
             })
 
             .then(response => response.json())
-            .then(JSONresponse => console.log(JSONresponse))
+            // .then(JSONresponse => console.log(JSONresponse))
             .then(JSONresponse => displayTeacherInfo(JSONresponse))
             .catch(err => console.error(err));
 
 
-    } else if (chosenData == "Student") {
+    } else  {
         endpoint = "http://localhost:8080/login/student";
 
         fetch(endpoint, {

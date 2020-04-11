@@ -39,7 +39,7 @@ import {
 const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
-let currentUser;
+let currentUser ='';
 const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
@@ -110,7 +110,7 @@ const displayTeacherInfo = (JSONresponse) => {
     currentUser = JSONresponse;
     renderTeacherView();
      
-
+    console.log(createChatView());
     // anchor.appendChild(createUserInfosCard(JSONresponse));
     anchor.appendChild(createChatView());
 
