@@ -88,24 +88,12 @@ const createChatView = () => {
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
 
-                .then(conversations => conversations.forEach(conversation => {
+                .then(conversations => submitMessageFetches(conversations, msgInput.value))
 
-                    console.log(conversations);
-                    if (conversation.teacher.id === teacherInput.value && conversation.student.id === currentUser.id) {
-                        fetch(`http://localhost:8080/conversations/${conversation.id}`, {
-
-                                method: 'PATCH',
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: msgInput.value
-
-                            })
-                            .then(response => response.json())
-                            .then(response => {
-                                msgList.appendChild(messageContent(response.content));
-                            }).catch(err => console.error(err));
-                    } else {
+            /*   console.log(conversations);
+               if (conversation.teacher.id === teacherInput.value && conversation.student.id === currentUser.id) {
+                   patchMessage();*/
+            /* } else {
                         fetch('http://localhost:8080/conversations', {
                                 method: "POST",
                                 headers: {
@@ -120,10 +108,7 @@ const createChatView = () => {
                             })
                             .catch(err => console.error(err));
                     }
-                })).catch(err => console.error(err));
-
-
-
+                }).catch(err => console.error(err));*/
 
 
             teacherInput.addEventListener('change', (e) => {
@@ -133,7 +118,7 @@ const createChatView = () => {
         } else {
             console.log("you need to enter a message");
         }
-    }
+    };
 
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -150,6 +135,39 @@ const createChatView = () => {
     chatViewWrapper.appendChild(chatFooter);
     return chatViewWrapper;
 }
+
+const patchMessage = (id, msgContent) => {
+
+    fetch(`http://localhost:8080/conversations/${id}`, {
+
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: msgContent
+
+        })
+        .then(response => response.json())
+        .then(response => {
+            msgList.appendChild(messageContent(response.content));
+            console.log(response.content);
+        }).catch(err => console.error(err));
+
+};
+
+
+
+const submitMessageFetches = (conversations, msgContent) => {
+    /* console.log(conversations);*/
+    for (let i; i < conversations.length; i++) {
+
+        if (conversation[i].teacher.id === teacherInput.value && conversation[i].student.id === currentUser.id) {
+            patchMessage(conversation[i].id, msgContent);
+        }
+    }
+
+}
+
 
 export {
     createChatView
