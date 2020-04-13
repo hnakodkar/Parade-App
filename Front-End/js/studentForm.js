@@ -1,3 +1,7 @@
+import {
+    languagues
+} from './translateComponent.js';
+
 const createStudentForm = () => {
 
     const studentFormWrapper = document.createElement('div');
@@ -33,28 +37,29 @@ const createStudentForm = () => {
     const parentPhoneInput = document.createElement('input');
     parentPhoneInput.setAttribute('type', 'text');
 
-    const languages = [{
-        lang: 'French',
-        code: 'fr'
-    }, {
-        lang: 'Spanish',
-        code: 'sp'
-    }, {
-        lang: 'German',
-        code: 'gr'
-    }];
+
+    console.log(languagues);
 
     const parentlanguage = document.createElement('p');
     parentlanguage.innerText = 'Parent Language';
     const languageInput = document.createElement('select');
 
-    for (let i = 0; i < languages.length; i++) {
-        const optionElement = document.createElement('option');
+    const languageListValues = Object.values(languagues.langs);
+    const languageListKeys = Object.keys(languagues.langs);
+    console.log(Object.values(languageList));
 
-        optionElement.setAttribute('value', languages[i].code);
-        optionElement.innerText = languages[i].lang;
+
+    for (let i = 0; i < languageList.length; i++) {
+
+        const optionElement = document.createElement('option');
+        console.log(optionElement);
+        optionElement.setAttribute('value', Object.keys(languageList)[i]);
+        optionElement.innerText = Object.values(languageListValue)[i];
         languageInput.appendChild(optionElement);
     }
+
+
+
 
     const submitBtnWrapper = document.createElement('div');
     const submitBtn = document.createElement('button');

@@ -35,11 +35,18 @@ import {
 import {
     createAssignmentView
 } from './assignmentComponent.js';
+import {
+    translateMessage
+} from './translateComponent.js';
+import {
+    getAllThelanguages
+} from './translateComponent.js';
+
 
 const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
-let currentUser ='';
+let currentUser = '';
 const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
@@ -102,31 +109,33 @@ const renderTeacherView = () => {
     // displayHeader();
     // displayFooter();
     displayAssignmentView();
-   
+
     displayStudentForm();
 }
 
 const displayTeacherInfo = (JSONresponse) => {
     currentUser = JSONresponse;
     renderTeacherView();
-     
+
     console.log(createChatView());
     // anchor.appendChild(createUserInfosCard(JSONresponse));
     anchor.appendChild(createChatView());
 
 }
 
-const displayStudentInfo = (JSONresponse) =>{
+const displayStudentInfo = (JSONresponse) => {
     currentUser = JSONresponse;
     renderStudentView();
 }
 
-
+translateMessage('en', 'es',
+    'We are coding');
+getAllThelanguages();
 renderLoginView();
 
- //displayChatView();
+//displayChatView();
 
-    // displayUserInfos();
+// displayUserInfos();
 /*displayTeacherForm();
 displayCourseForm();
 displayAssignmentForm();*/
