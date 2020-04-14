@@ -123,12 +123,7 @@ const displayTeacherInfo = (JSONresponse) => {
 
 }
 
-<<<<<<< HEAD
-const displayStudentInfo = (JSONresponse) =>{
-    console.log(JSONresponse);
-=======
 const displayStudentInfo = (JSONresponse) => {
->>>>>>> dfadbc2854132b5c24b509e4ff34235661098a4b
     currentUser = JSONresponse;
     //renderStudentView();
     displayChatView()
