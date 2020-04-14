@@ -124,9 +124,9 @@ const messageContent = (msg) => {
     message.innerText = msg;
     const timeStamp = document.createElement('div');
     timeStamp.innerText = new Date().toLocaleTimeString();
-    msgWrapper.appendChild(uname);
+    // msgWrapper.appendChild(uname);
     msgWrapper.appendChild(message);
-    msgWrapper.appendChild(timeStamp);
+    // msgWrapper.appendChild(timeStamp);
     return msgWrapper;
 };
 
