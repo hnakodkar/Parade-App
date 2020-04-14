@@ -117,8 +117,10 @@ const displayTeacherInfo = (JSONresponse) => {
 }
 
 const displayStudentInfo = (JSONresponse) =>{
+    console.log(JSONresponse);
     currentUser = JSONresponse;
-    renderStudentView();
+    //renderStudentView();
+    displayChatView()
 }
 
 

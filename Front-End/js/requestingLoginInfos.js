@@ -41,7 +41,7 @@ const requestingLogingInfos = (usernameValue, passwordValue) => {
             })
 
             .then(response => response.json())
-            .then(JSONresponse => console.log(JSONresponse))
+            //.then(JSONresponse => console.log(JSONresponse))
             .then(JSONresponse => displayStudentInfo(JSONresponse))
             .catch(err => console.error(err));
     }

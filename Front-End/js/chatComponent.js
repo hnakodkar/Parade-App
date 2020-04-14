@@ -1,7 +1,7 @@
 import {
     currentUser
 }
-from "./app.js";
+    from "./app.js";
 const createChatView = () => {
     const chatViewWrapper = document.createElement('section');
     chatViewWrapper.classList.add('chat');
@@ -15,24 +15,31 @@ const createChatView = () => {
     const chatBody = document.createElement('div');
     chatBody.classList.add('chat-body');
     const msgList = document.createElement('ul');
+    msgList.classList.add('msgList');
     chatBody.appendChild(msgList);
     const teacherNamewrapper = document.createElement('div');
     const teacherName = document.createElement('h3');
     teacherNamewrapper.appendChild(teacherName);
     let users;
-    // console.log(currentUser);
+    console.log(currentUser);
+    let firstId;
     fetch(currentUser.parentPhone ? 'http://localhost:8080/teachers' : 'http://localhost:8080/students')
         .then(response => response.json())
         .then(res => {
             users = res;
+            renderConversation(users[0].id);
+            console.log('json response');
+            console.log(users[0].id);
             for (let i = 0; i < users.length; i++) {
                 const optionElement = document.createElement('option');
                 optionElement.setAttribute('value', users[i].id);
                 optionElement.innerText = users[i].name;
                 teacherInput.appendChild(optionElement);
+                
             }
         })
         .catch(err => console.error(err));
+
     const selctTeacherwrapper = document.createElement('div');
     const teacherLabel = document.createElement('p');
     teacherLabel.innerText = 'Select the User';
@@ -49,23 +56,17 @@ const createChatView = () => {
     const sendingBtnWrapper = document.createElement('div');
     const submitBtn = document.createElement('button');
     submitBtn.innerText = 'Send';
+console.log(firstId);
+    
 
+    teacherInput.addEventListener('change', (e) => {
+        teacherName.innerText = e.target.options[teacherInput.selectedIndex].text;
+        while (msgList.firstChild) {
+            msgList.removeChild(msgList.firstChild);
+        }
+        renderConversation(teacherInput.value);
+    });
 
-    const messageContent = (msg) => {
-        const msgWrapper = document.createElement('li');
-        msgWrapper.classList.add('content-body');
-        const uname = document.createElement('h4');
-        uname.innerText = currentUser.username;
-        const message = document.createElement('div');
-        message.classList.add('msgText');
-        message.innerText = msg;
-        const timeStamp = document.createElement('div');
-        timeStamp.innerText = new Date().toLocaleTimeString();
-        msgWrapper.appendChild(uname);
-        msgWrapper.appendChild(message);
-        msgWrapper.appendChild(timeStamp);
-        return msgWrapper;
-    };
     const sendMessage = () => {
         if (msgInput.value != '') {
             const msgBody = currentUser.parentPhone ? {
@@ -75,60 +76,20 @@ const createChatView = () => {
                 "student": {
                     "id": currentUser.id
                 },
-                "content": [msgInput.value]
+                "content": [currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
             } : {
-                "teacher": {
-                    "id": currentUser.id
-                },
-                "student": {
-                    "id": teacherInput.value
-                },
-                "content": [msgInput.value]
-            };
+                    "teacher": {
+                        "id": currentUser.id
+                    },
+                    "student": {
+                        "id": teacherInput.value
+                    },
+                    "content": [currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
+                };
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
 
-                .then(conversations => conversations.forEach(conversation => {
-
-                    console.log(conversations);
-                    if (conversation.teacher.id === teacherInput.value && conversation.student.id === currentUser.id) {
-                        fetch(`http://localhost:8080/conversations/${conversation.id}`, {
-
-                                method: 'PATCH',
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: msgInput.value
-
-                            })
-                            .then(response => response.json())
-                            .then(response => {
-                                msgList.appendChild(messageContent(response.content));
-                            }).catch(err => console.error(err));
-                    } else {
-                        fetch('http://localhost:8080/conversations', {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: JSON.stringify(msgBody)
-                            })
-                            .then(response => response.json())
-                            .then(JSONresponse => {
-                                console.log(JSONresponse);
-                                msgList.appendChild(messageContent(JSONresponse.content));
-                            })
-                            .catch(err => console.error(err));
-                    }
-                })).catch(err => console.error(err));
-
-
-
-
-
-            teacherInput.addEventListener('change', (e) => {
-                teacherName.innerText = e.target.options[teacherInput.selectedIndex].text;
-            });
+                .then(conversations => messagePostOrPatch(conversations, msgBody, teacherInput.value));
 
         } else {
             console.log("you need to enter a message");
@@ -140,6 +101,8 @@ const createChatView = () => {
         sendMessage();
         msgInput.value = '';
     });
+console.log(teacherInput.value);
+    renderConversation(teacherInput.value);
 
     sendingBtnWrapper.appendChild(submitBtn);
     inputWrapper.appendChild(msgInput);
@@ -149,6 +112,77 @@ const createChatView = () => {
     chatViewWrapper.appendChild(chatBody);
     chatViewWrapper.appendChild(chatFooter);
     return chatViewWrapper;
+}
+
+const messageContent = (msg) => {
+    const msgWrapper = document.createElement('li');
+    msgWrapper.classList.add('content-body');
+    const uname = document.createElement('h4');
+    uname.innerText = currentUser.username;
+    const message = document.createElement('div');
+    message.classList.add('msgText');
+    message.innerText = msg;
+    const timeStamp = document.createElement('div');
+    timeStamp.innerText = new Date().toLocaleTimeString();
+    msgWrapper.appendChild(uname);
+    msgWrapper.appendChild(message);
+    msgWrapper.appendChild(timeStamp);
+    return msgWrapper;
+};
+
+const messagePostOrPatch = (conversations, newMessage, teachInput) => {
+    console.log(conversations);
+    const chatDisplay = document.querySelector('.msgList');
+    for (let conversation of conversations) {
+
+        if ((conversation.teacher.id == teachInput && conversation.student.id == currentUser.id) ||
+            (currentUser.id == conversation.teacher.id && conversation.student.id == teachInput)) {
+            console.log('PATCH');
+            fetch(`http://localhost:8080/conversations/${conversation.id}`, {
+
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: newMessage.content
+
+            })
+                .then(response => response.json())
+                .then(response => {
+                    while (chatDisplay.firstChild) {
+                        chatDisplay.removeChild(chatDisplay.firstChild);
+                    }
+                    response.content.forEach((content) => chatDisplay.appendChild(messageContent(content)));
+                }).catch(err => console.error(err));
+            return;
+        }
+    }
+    console.log('Post');
+    fetch('http://localhost:8080/conversations', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newMessage)
+    })
+        .then(response => response.json())
+        .then(JSONresponse => {
+            console.log(JSONresponse);
+            document.querySelector('.msgList').appendChild(messageContent(JSONresponse.content));
+        })
+        .catch(err => console.error(err));
+}
+
+const renderConversation = (teacherInput) => {
+    fetch('http://localhost:8080/conversations')
+    .then(response => response.json())
+    .then(conversations => {
+        for (let conversation of conversations) {
+            if ((conversation.teacher.id == teacherInput && conversation.student.id == currentUser.id) ||
+                (currentUser.id == conversation.teacher.id && conversation.student.id == teacherInput)){
+                    conversation.content.forEach((content) => document.querySelector('.msgList').appendChild(messageContent(content)));
+                }
+    }});
 }
 
 export {
