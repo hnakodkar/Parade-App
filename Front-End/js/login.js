@@ -19,6 +19,7 @@ const createLogin = () => {
     loginOption.appendChild(studentChoice);
 
     const loginWrapper = document.createElement('section');
+    loginWrapper.classList.add('login-section');
 
     const username = document.createElement('p');
     username.innerText = 'User Name';

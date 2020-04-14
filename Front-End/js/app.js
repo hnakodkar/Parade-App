@@ -47,6 +47,7 @@ const anchor = document.querySelector('.anchor');
 const footerAnchor = document.querySelector('.footer-anchor');
 const headerAnchor = document.querySelector('.header-anchor');
 let currentUser = '';
+
 const renderLogin = () => {
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild);
@@ -115,7 +116,7 @@ const renderTeacherView = () => {
 
 const displayTeacherInfo = (JSONresponse) => {
     currentUser = JSONresponse;
-    renderTeacherView();
+    // renderTeacherView();
 
     console.log(createChatView());
     // anchor.appendChild(createUserInfosCard(JSONresponse));
@@ -129,8 +130,8 @@ const displayStudentInfo = (JSONresponse) => {
     displayChatView()
 }
 
-translateMessage('en', 'es',
-    'We are coding');
+// translateMessage('en', 'es',
+//     'We are coding');
 getAllThelanguages();
 renderLoginView();
 
