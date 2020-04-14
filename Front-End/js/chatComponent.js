@@ -191,9 +191,7 @@ const renderConversation = (teacherInput) => {
     })
             if (currentUser.id == conversation.teacher.id && conversation.student.id == teacherInput){
                     conversation.content.forEach((content) => 
-                    translateMessage('fr', 'en', content));
-
-                        // document.querySelector('.msgList').appendChild(messageContent(content)));
+                        document.querySelector('.msgList').appendChild(messageContent(content)));
                 }
     }}});
 }
