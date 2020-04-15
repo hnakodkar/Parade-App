@@ -18,10 +18,10 @@ const createFooter = () => {
     footerElement.classList.add('footer');
     const footerContent = document.createElement('div');
     const hetal = footerLinkCreator('http://hnakodkar.github.io/', 'Hetal Nakodkar');
-    const abdul = footerLinkCreator('http://hnakodkar.github.io/', 'Abdul Abdul ');
+    const abdul = footerLinkCreator('https://abdulj23.github.io/', 'Abdul Abdul ');
     const daly = footerLinkCreator('http://dalytekam.github.io/', 'Daly Tekam');
     const nadir = footerLinkCreator('https://nayhova.github.io', 'Nadir Carpenter');
-    const olivia = footerLinkCreator('http://hnakodkar.github.io/', 'Olivia Smith');
+    const olivia = footerLinkCreator('http://oliviasmith311.github.io/', 'Olivia Smith');
     const innocent = footerLinkCreator('http://hnakodkar.github.io/', 'Innocent Mbanda');
 
     footerContent.appendChild(hetal);
