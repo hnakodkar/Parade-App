@@ -202,6 +202,8 @@ const translateConvo = async(content) => {
     content.forEach( message => 
         translated.push(await translateMessage(message)))};
 
+
+
 const displayTranslatedMessages = (content) => {
     document.querySelector('.msgList').appendChild(messageContent(content));
 }
