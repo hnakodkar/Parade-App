@@ -3,7 +3,7 @@ import {
 }
 from "./app.js";
 import {
-    translateMessage
+    translateMessage, translateSentMessage
 } from "./translateComponent.js"
 
 const createChatView = () => {
@@ -88,6 +88,11 @@ const createChatView = () => {
                 },
                 "content": [ "|" + currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
             };
+            if (currentUser.parentPhone){
+                fetch('http://localhost:8080/conversations')
+                .then(response => response.json())
+                .then(conversations => translateSentMessage(conversations, msgBody, teacherInput.value, currentUser.language));
+            }
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
 
@@ -203,5 +208,6 @@ const displayTranslatedMessages = (content) => {
 
 export {
     createChatView,
-    displayTranslatedMessages
+    displayTranslatedMessages,
+    messagePostOrPatch
 };
