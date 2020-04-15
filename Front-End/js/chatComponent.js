@@ -153,11 +153,11 @@ const messagePostOrPatch = (conversations, newMessage, teachInput) => {
 
             })
                 .then(response => response.json())
-                .then(response => {
+                .then(JSONresponse => {
                     while (chatDisplay.firstChild) {
                         chatDisplay.removeChild(chatDisplay.firstChild);
                     }
-                    renderConversation(currentUser.parentPhone ? response.teacher.id : response.student.id);
+                    renderConversation(currentUser.parentPhone ? JSONresponse.teacher.id : JSONresponse.student.id);
                 }).catch(err => console.error(err));
             return;
         }
@@ -188,13 +188,13 @@ const renderConversation = (teacherInput) => {
                 conversation.content.forEach((content) => {
                        translateMessage('en', 'fr', content);
 
-    })
-            if (currentUser.id == conversation.teacher.id && conversation.student.id == teacherInput){
-                    conversation.content.forEach((content) => 
-                        document.querySelector('.msgList').appendChild(messageContent(content)));
+    })}
+            if (conversation.teacher.id == currentUser.id && conversation.student.id == teacherInput){
+                    conversation.content.forEach((content) => {
+                        translateMessage('fr', 'en', content)});
                 }
-    }}});
-}
+    }})};
+
 
 const displayTranslatedMessages = (content) => {
 
