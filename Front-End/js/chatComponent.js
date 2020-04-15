@@ -1,7 +1,7 @@
 import {
     currentUser
 }
-    from "./app.js";
+from "./app.js";
 import {
     translateMessage
 } from "./translateComponent.js"
@@ -39,7 +39,7 @@ const createChatView = () => {
                 optionElement.setAttribute('value', users[i].id);
                 optionElement.innerText = users[i].name;
                 teacherInput.appendChild(optionElement);
-                
+
             }
         })
         .catch(err => console.error(err));
@@ -60,8 +60,7 @@ const createChatView = () => {
     const sendingBtnWrapper = document.createElement('div');
     const submitBtn = document.createElement('button');
     submitBtn.innerText = 'Send';
-console.log(firstId);
-    
+
 
     teacherInput.addEventListener('change', (e) => {
         teacherName.innerText = e.target.options[teacherInput.selectedIndex].text;
@@ -82,14 +81,14 @@ console.log(firstId);
                 },
                 "content": [currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
             } : {
-                    "teacher": {
-                        "id": currentUser.id
-                    },
-                    "student": {
-                        "id": teacherInput.value
-                    },
-                    "content": [currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
-                };
+                "teacher": {
+                    "id": currentUser.id
+                },
+                "student": {
+                    "id": teacherInput.value
+                },
+                "content": [currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
+            };
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
 
@@ -105,7 +104,6 @@ console.log(firstId);
         sendMessage();
         msgInput.value = '';
     });
-console.log(teacherInput.value);
 
     sendingBtnWrapper.appendChild(submitBtn);
     inputWrapper.appendChild(msgInput);
@@ -145,66 +143,71 @@ const messagePostOrPatch = (conversations, newMessage, teachInput) => {
             console.log('PATCH');
             fetch(`http://localhost:8080/conversations/${conversation.id}`, {
 
-                method: 'PATCH',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: newMessage.content
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: newMessage.content
 
-            })
+                })
                 .then(response => response.json())
-                .then(response => {
+                .then(JSONresponse => {
                     while (chatDisplay.firstChild) {
                         chatDisplay.removeChild(chatDisplay.firstChild);
                     }
-                    renderConversation(currentUser.parentPhone ? response.teacher.id : response.student.id);
+                    renderConversation(currentUser.parentPhone ? JSONresponse.teacher.id : JSONresponse.student.id);
                 }).catch(err => console.error(err));
             return;
         }
     }
     console.log('Post');
     fetch('http://localhost:8080/conversations', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newMessage)
-    })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newMessage)
+        })
         .then(response => response.json())
         .then(JSONresponse => {
             while (chatDisplay.firstChild) {
                 chatDisplay.removeChild(chatDisplay.firstChild);
             }
-            renderConversation(currentUser.parentPhone ? JSONresponse.teacher.id : JSONresponse.student.id);        })
+            renderConversation(currentUser.parentPhone ? JSONresponse.teacher.id : JSONresponse.student.id);
+        })
         .catch(err => console.error(err));
 }
 
 const renderConversation = (teacherInput) => {
     fetch('http://localhost:8080/conversations')
-    .then(response => response.json())
-    .then(conversations => {
-        for (let conversation of conversations) {
-            if (conversation.teacher.id == teacherInput && conversation.student.id == currentUser.id){
-                conversation.content.forEach((content) => {
-                       translateMessage('en', 'fr', content);
+        .then(response => response.json())
+        .then(conversations => {
+            for (let conversation of conversations) {
+                if (conversation.teacher.id == teacherInput && conversation.student.id == currentUser.id) {
+                    conversation.content.forEach((content) => {
+                        translateMessage('en', 'fr', content);
 
-    })
-            if (currentUser.id == conversation.teacher.id && conversation.student.id == teacherInput){
-                    conversation.content.forEach((content) => 
-                        document.querySelector('.msgList').appendChild(messageContent(content)));
+                    })
                 }
-    }}});
-}
+                if (conversation.teacher.id == currentUser.id && conversation.student.id == teacherInput) {
+                    conversation.content.forEach((content) => {
+                        translateMessage('fr', 'en', content)
+                    });
+                }
+            }
+        })
+};
+const translateConvo = async(content) => { 
+    const translated = []; 
+    content.forEach( message => 
+        translated.push(await translateMessage(message)))};
 
 const displayTranslatedMessages = (content) => {
-
     document.querySelector('.msgList').appendChild(messageContent(content));
-
-
 }
 
 
 export {
-    createChatView, 
+    createChatView,
     displayTranslatedMessages
 };
