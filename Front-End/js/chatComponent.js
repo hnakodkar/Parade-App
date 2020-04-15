@@ -132,7 +132,7 @@ const messageContent = (msg) => {
     const timeStamp = document.createElement('div');
     timeStamp.innerText = new Date().toLocaleTimeString();
     // msgWrapper.appendChild(uname);
-    msgWrapper.appendChild(message);
+    // msgWrapper.appendChild(message);
     // msgWrapper.appendChild(timeStamp);
     return msgWrapper;
 };
