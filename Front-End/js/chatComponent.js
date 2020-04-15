@@ -3,7 +3,7 @@ import {
 }
 from "./app.js";
 import {
-    translateMessage
+    translateMessage, translateSentMessage
 } from "./translateComponent.js"
 
 const createChatView = () => {
@@ -32,8 +32,7 @@ const createChatView = () => {
         .then(res => {
             users = res;
             renderConversation(users[0].id);
-            console.log('json response');
-            console.log(users[0].id);
+
             for (let i = 0; i < users.length; i++) {
                 const optionElement = document.createElement('option');
                 optionElement.setAttribute('value', users[i].id);
@@ -79,7 +78,7 @@ const createChatView = () => {
                 "student": {
                     "id": currentUser.id
                 },
-                "content": [currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
+                "content": [ "|" + currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
             } : {
                 "teacher": {
                     "id": currentUser.id
@@ -87,8 +86,13 @@ const createChatView = () => {
                 "student": {
                     "id": teacherInput.value
                 },
-                "content": [currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
+                "content": [ "|" + currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
             };
+            if (currentUser.parentPhone){
+                fetch('http://localhost:8080/conversations')
+                .then(response => response.json())
+                .then(conversations => translateSentMessage(conversations, msgBody, teacherInput.value, currentUser.language));
+            }
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
 
@@ -184,32 +188,26 @@ const renderConversation = (teacherInput) => {
         .then(conversations => {
             for (let conversation of conversations) {
                 if (conversation.teacher.id == teacherInput && conversation.student.id == currentUser.id) {
-                    conversation.content.forEach((content) => {
-                        translateMessage('en', 'fr', content);
-
-                    })
+                    translateMessage('en', conversation.student.language, conversation.content);
+                    
                 }
                 if (conversation.teacher.id == currentUser.id && conversation.student.id == teacherInput) {
-                    conversation.content.forEach((content) => {
-                        translateMessage('fr', 'en', content)
-                    });
+                    translateMessage(conversation.student.language, 'en', conversation.content);
+                    
                 }
             }
         })
 };
-const translateConvo = async(content) => { 
-    const translated = []; 
-    content.forEach( message => 
-        translated.push(await translateMessage(message)))};
-
 
 
 const displayTranslatedMessages = (content) => {
-    document.querySelector('.msgList').appendChild(messageContent(content));
+    const splitTranslation = content.split("|");
+    splitTranslation.forEach(message => document.querySelector('.msgList').appendChild(messageContent(message)));
 }
 
 
 export {
     createChatView,
-    displayTranslatedMessages
+    displayTranslatedMessages,
+    messagePostOrPatch
 };

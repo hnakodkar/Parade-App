@@ -27,7 +27,7 @@ public class Populator implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Student abdul = new Student("Abdul", "AbdulParent", "123", "email", "911", "English", "abdul123", "abdul");
+        Student abdul = new Student("Abdul", "AbdulParent", "123", "email", "911", "fr", "abdul123", "abdul");
         Student hetal = new Student("Hetal");
         Student innocent= new Student("Innocent");
         studentRepo.save(abdul);

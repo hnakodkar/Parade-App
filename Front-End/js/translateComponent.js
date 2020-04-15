@@ -1,5 +1,5 @@
 import {
-    displayTranslatedMessages
+    displayTranslatedMessages, messagePostOrPatch
 } from "./chatComponent.js"
 
 const translateMessage = (baseLanguage, translatedLanguage, message) => {
@@ -7,9 +7,9 @@ const translateMessage = (baseLanguage, translatedLanguage, message) => {
     const translationEndpoint = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
 
     const apiKey = 'trnsl.1.1.20200331T021614Z.c694db314be5bc51.2c0c229d52f7f79b60f801b9a658e149e1b57ce7';
-    const splitMessage = message.split('--');
+   
 
-    fetch(`${translationEndpoint}?key=${apiKey}&text=${splitMessage[1]}&lang=${baseLanguage}-${translatedLanguage}`, {
+    fetch(`${translationEndpoint}?key=${apiKey}&text=${message}&lang=${baseLanguage}-${translatedLanguage}`, {
             method: "POST",
             /* headers: {
                  "Content-Type": "application/x-www-form-urlencoded"
@@ -17,11 +17,33 @@ const translateMessage = (baseLanguage, translatedLanguage, message) => {
 
         })
         .then(response => response.json())
-        .then(response => splitMessage[0] + response.text);
+        .then(response => response.text.forEach(translation => {displayTranslatedMessages(translation)}));
 
-        // .then(response => displayTranslatedMessages(splitMessage[0] + response.text));
+
 }
 
+const translateSentMessage = (conversations, msgBody, teacherId, language) => {
+
+    const translationEndpoint = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
+
+    const apiKey = 'trnsl.1.1.20200331T021614Z.c694db314be5bc51.2c0c229d52f7f79b60f801b9a658e149e1b57ce7';
+   
+
+    fetch(`${translationEndpoint}?key=${apiKey}&text=${msgBody.content}&lang=${language}-${'en'}`, {
+            method: "POST",
+            /* headers: {
+                 "Content-Type": "application/x-www-form-urlencoded"
+             }*/
+
+        })
+        .then(response => response.json())
+        .then(response => {msgBody.content = [response.text];
+            console.log("message body is" + msgBody.content);
+            messagePostOrPatch(conversations, msgBody,teacherId);
+        });
+        
+
+}
 let languagues;
 const getAllThelanguages = () => {
 
@@ -42,5 +64,6 @@ const getAllThelanguages = () => {
 export {
     translateMessage,
     getAllThelanguages,
-    languagues
+    languagues,
+    translateSentMessage
 }

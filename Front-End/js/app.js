@@ -105,27 +105,29 @@ const renderLoginView = () => {
     });
 }
 
-const renderTeacherView = () => {
+// const renderTeacherView = () => {
 
-    // displayHeader();
-    // displayFooter();
-    displayAssignmentView();
+//     // displayHeader();
+//     // displayFooter();
+//     displayAssignmentView();
 
-    displayStudentForm();
-}
+//     displayStudentForm();
+// }
 
 const displayTeacherInfo = (JSONresponse) => {
     currentUser = JSONresponse;
-    // renderTeacherView();
-
-    console.log(createChatView());
-    // anchor.appendChild(createUserInfosCard(JSONresponse));
-    anchor.appendChild(createChatView());
+    while(anchor.firstChild){
+        anchor.removeChild(anchor.firstChild)
+    }
+ displayChatView();
 
 }
 
 const displayStudentInfo = (JSONresponse) => {
     currentUser = JSONresponse;
+    while(anchor.firstChild){
+        anchor.removeChild(anchor.firstChild)
+    }
     //renderStudentView();
     displayChatView()
 }
