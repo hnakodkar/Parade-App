@@ -17,7 +17,9 @@ const translateMessage = (baseLanguage, translatedLanguage, message) => {
 
         })
         .then(response => response.json())
-        .then(response => displayTranslatedMessages(splitMessage[0] + response.text));
+        .then(response => splitMessage[0] + response.text);
+
+        // .then(response => displayTranslatedMessages(splitMessage[0] + response.text));
 }
 
 let languagues;
