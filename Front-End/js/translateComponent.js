@@ -12,9 +12,6 @@ const translateMessage = (baseLanguage, translatedLanguage, message) => {
 
     fetch(`${translationEndpoint}?key=${apiKey}&text=${message}&lang=${baseLanguage}-${translatedLanguage}`, {
             method: "POST",
-            /* headers: {
-                 "Content-Type": "application/x-www-form-urlencoded"
-             }*/
 
         })
         .then(response => response.json())
@@ -34,17 +31,17 @@ const translateSentMessage = (conversations, msgBody, teacherId, language) => {
 
     fetch(`${translationEndpoint}?key=${apiKey}&text=${msgBody.content}&lang=${language}-${'en'}`, {
             method: "POST",
-            /* headers: {
-                 "Content-Type": "application/x-www-form-urlencoded"
-             }*/
+
 
         })
         .then(response => response.json())
         .then(response => {
             msgBody.content = [response.text];
-            console.log("message body is" + msgBody.content);
-            messagePostOrPatch(conversations, msgBody, teacherId);
+            msgBody.teacher.id = teacherId;
+            console.log(teacherId);
+            setTimeout(messagePostOrPatch(conversations, msgBody, teacherId), 1000);
         });
+
 
 
 }

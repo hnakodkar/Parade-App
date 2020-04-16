@@ -35,7 +35,9 @@ const createChatView = (color) => {
             users = res;
             renderConversation(users[0].id);
 
+
             for (let i = 0; i < users.length; i++) {
+                console.log(users[i].id);
                 const optionElement = document.createElement('option');
                 optionElement.setAttribute('value', users[i].id);
                 optionElement.innerText = users[i].name;
@@ -170,6 +172,7 @@ const messagePostOrPatch = (conversations, newMessage, teachInput) => {
         }
     }
     console.log('Post');
+    console.log(newMessage);
     fetch('http://localhost:8080/conversations', {
             method: "POST",
             headers: {
@@ -182,13 +185,14 @@ const messagePostOrPatch = (conversations, newMessage, teachInput) => {
             while (chatDisplay.firstChild) {
                 chatDisplay.removeChild(chatDisplay.firstChild);
             }
-            console.log('log' + JSONresponse.teacher.id);
+            /* console.log('log' + JSONresponse.teacher.id);*/
             renderConversation(currentUser.parentPhone ? JSONresponse.teacher.id : JSONresponse.student.id);
         })
         .catch(err => console.error(err));
 }
 
 const renderConversation = (teacherInput) => {
+    console.log(parseInt(teacherInput));
     fetch('http://localhost:8080/conversations')
         .then(response => response.json())
         .then(conversations => {

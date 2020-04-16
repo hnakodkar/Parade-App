@@ -141,14 +141,20 @@ body {
 /** User Infos Card**/
 
 .user {
+
     display: grid;
-    border: 1px solid #eee;
     box-shadow: 0px 2px 2px #ccc;
-    padding: 5px;
-    width: 15rem;
-    height: 4.6rem;
+    padding: 10px;
+    width: 20rem;
+    height: 5.5rem;
     overflow: hidden;
     transition: all 200ms linear;
+    border: 1px solid #7070d1;
+    background-color: rgba(112, 112, 209, 0.5);
+}
+
+.user h3 {
+    margin-top: 10px;
 }
 
 .user span {

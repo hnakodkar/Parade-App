@@ -55,8 +55,25 @@ public class Populator implements CommandLineRunner {
         courseRepo.save(biology);
         courseRepo.save(english);
 
-        Conversation message= new Conversation(Collections.singletonList("homework"),smith,hetal);
-        conversationRepository.save(message);
+        Conversation message1= new Conversation(Collections.singletonList(""),smith,hetal);
+        Conversation message2= new Conversation(Collections.singletonList(""),smith,abdul);
+        Conversation message3= new Conversation(Collections.singletonList(""),smith,innocent);
+        Conversation message4= new Conversation(Collections.singletonList(""),ashley,hetal);
+        Conversation message5= new Conversation(Collections.singletonList(""),ashley,abdul);
+        Conversation message6= new Conversation(Collections.singletonList(""),ashley,innocent);
+        Conversation message7= new Conversation(Collections.singletonList(""),bob,hetal);
+        Conversation message8= new Conversation(Collections.singletonList(""),bob,abdul);
+        Conversation message9= new Conversation(Collections.singletonList(""),bob,innocent);
+
+        conversationRepository.save(message1);
+        conversationRepository.save(message2);
+        conversationRepository.save(message3);
+        conversationRepository.save(message4);
+        conversationRepository.save(message5);
+        conversationRepository.save(message6);
+        conversationRepository.save(message7);
+        conversationRepository.save(message8);
+        conversationRepository.save(message9);
 
 
     }
