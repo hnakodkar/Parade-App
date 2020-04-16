@@ -54,7 +54,7 @@ const createUserInfosCard = (userResponse) => {
     let isExpand = false;
     name.addEventListener('click', () => {
         if (isExpand == false) {
-            container.style.height = "10rem";
+            container.style.height = "12rem";
         } else {
             container.style.height = "4.6rem";
         }

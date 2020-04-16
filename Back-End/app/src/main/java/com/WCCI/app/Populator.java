@@ -28,15 +28,15 @@ public class Populator implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Student abdul = new Student("Abdul", "AbdulParent", "123", "abdul123@yahoo.com", "911", "fr", "abdul123", "abdul");
-        Student hetal = new Student("Hetal");
-        Student innocent= new Student("Innocent");
+        Student hetal = new Student("Hetal","hetal Parent","123","hetal123@yahoo.com","224","gu","hetal123","hetal");
+        Student innocent= new Student("Innocent","innocent Prent","123","innocent@gmail.com","65148789","es","innocent123","innocent");
         studentRepo.save(abdul);
         studentRepo.save(hetal);
         studentRepo.save(innocent);
 
-        Teacher smith= new Teacher("MrSmith", "123","smith@school.com","614883838","SweatSchool","smith123");
-        Teacher ashley= new Teacher("MissAshley");
-        Teacher bob= new Teacher("Bob");
+        Teacher smith= new Teacher("Mr Smith", "123","smith@school.com","614883838","smith123","smith");
+        Teacher ashley= new Teacher("Ms Ashley","123","ashley@hotmail.com","2148956325","ashley123", "ashley");
+        Teacher bob= new Teacher("Mr Bob","123","bob@gmail.com","5641235874","bob123","bob");
         teacherRepo.save(smith);
         teacherRepo.save(ashley);
         teacherRepo.save(bob);

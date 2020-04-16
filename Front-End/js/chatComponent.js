@@ -96,6 +96,7 @@ const createChatView = (color) => {
                 fetch('http://localhost:8080/conversations')
                     .then(response => response.json())
                     .then(conversations => translateSentMessage(conversations, msgBody, teacherInput.value, currentUser.language));
+                return;
             }
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
@@ -136,7 +137,7 @@ const messageContent = (msg) => {
     const timeStamp = document.createElement('div');
     timeStamp.innerText = new Date().toLocaleTimeString();
     // msgWrapper.appendChild(uname);
-    // msgWrapper.appendChild(message);
+    msgWrapper.appendChild(message);
     // msgWrapper.appendChild(timeStamp);
     return msgWrapper;
 };
@@ -181,6 +182,7 @@ const messagePostOrPatch = (conversations, newMessage, teachInput) => {
             while (chatDisplay.firstChild) {
                 chatDisplay.removeChild(chatDisplay.firstChild);
             }
+            console.log('log' + JSONresponse.teacher.id);
             renderConversation(currentUser.parentPhone ? JSONresponse.teacher.id : JSONresponse.student.id);
         })
         .catch(err => console.error(err));

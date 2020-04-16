@@ -19,7 +19,7 @@ const translateMessage = (baseLanguage, translatedLanguage, message) => {
         })
         .then(response => response.json())
         .then(response => response.text.forEach(translation => {
-            displayTranslatedMessages(translation)
+            displayTranslatedMessages(translation);
         }));
 
 
