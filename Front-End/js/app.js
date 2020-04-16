@@ -85,9 +85,9 @@ const displayAssignmentForm = () => {
     anchor.appendChild(createAssignment());
 }
 
-const displayChatView = () => {
+const displayChatView = (chatColor) => {
 
-    anchor.appendChild(createChatView());
+    anchor.appendChild(createChatView(chatColor));
 }
 
 const displayAssignmentView = () => {
@@ -100,6 +100,7 @@ const renderLoginView = () => {
     const btn = document.createElement('button');
     btn.innerText = 'User Login';
     anchor.appendChild(btn);
+
     btn.addEventListener('click', () => {
         renderLogin();
     });
@@ -114,22 +115,29 @@ const renderLoginView = () => {
 //     displayStudentForm();
 // }
 
+const displayUserInfos = (user) => {
+
+
+    anchor.appendChild(createUserInfosCard(user));
+}
 const displayTeacherInfo = (JSONresponse) => {
     currentUser = JSONresponse;
-    while(anchor.firstChild){
+    while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild)
     }
- displayChatView();
+    displayUserInfos(currentUser);
+    displayChatView('turquoise');
 
 }
 
 const displayStudentInfo = (JSONresponse) => {
     currentUser = JSONresponse;
-    while(anchor.firstChild){
+    while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild)
     }
     //renderStudentView();
-    displayChatView()
+    displayUserInfos(currentUser);
+    displayChatView('rgb(112, 112, 209)')
 }
 
 // translateMessage('en', 'es',
