@@ -30,7 +30,7 @@ const createUserInfosCard = (userResponse) => {
     const info2Label = document.createElement('h3');
     info2Label.innerText = 'Email: ';
     const info2 = document.createElement('span');
-    info2.innerText = userResponse.parentEmail;
+    info2.innerText = userResponse.parentPhone ? userResponse.parentEmail : userResponse.email;
     info2Label.append(info2);
 
     const info3Label = document.createElement('h3');
@@ -40,9 +40,9 @@ const createUserInfosCard = (userResponse) => {
     info3Label.append(info3);
 
     const info4Label = document.createElement('h3');
-    info4Label.innerText = 'Phone';
+    info4Label.innerText = 'Phone: ';
     const info4 = document.createElement('span');
-    info4.innerText = userResponse.parentPhone;
+    info4.innerText = userResponse.parentPhone ? userResponse.parentPhone : userResponse.phone;
     info4Label.append(info4);
 
 

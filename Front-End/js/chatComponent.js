@@ -3,16 +3,18 @@ import {
 }
 from "./app.js";
 import {
-    translateMessage, translateSentMessage
+    translateMessage,
+    translateSentMessage
 } from "./translateComponent.js"
 
-const createChatView = () => {
+const createChatView = (color) => {
     const chatViewWrapper = document.createElement('section');
     chatViewWrapper.classList.add('chat');
     chatViewWrapper.classList.add('view');
     const chatHeader = document.createElement('div');
     chatHeader.classList.add('chat-header');
     chatHeader.classList.add('view-header');
+    chatHeader.style.backgroundColor = color;
     const chatTitle = document.createElement('h3');
     chatTitle.innerText = 'CHAT';
     chatHeader.appendChild(chatTitle);
@@ -26,7 +28,7 @@ const createChatView = () => {
     teacherNamewrapper.appendChild(teacherName);
     let users;
     console.log(currentUser);
-    let firstId;
+
     fetch(currentUser.parentPhone ? 'http://localhost:8080/teachers' : 'http://localhost:8080/students')
         .then(response => response.json())
         .then(res => {
@@ -53,11 +55,13 @@ const createChatView = () => {
     chatHeader.appendChild(teacherNamewrapper);
     const chatFooter = document.createElement('div');
     chatFooter.classList.add('chat-footer');
+    chatFooter.style.borderTop = `2px solid ${color}`;
     const inputWrapper = document.createElement('div');
     const msgInput = document.createElement('input');
     msgInput.setAttribute('type', 'text');
     const sendingBtnWrapper = document.createElement('div');
     const submitBtn = document.createElement('button');
+    submitBtn.style.backgroundColor = color;
     submitBtn.innerText = 'Send';
 
 
@@ -78,7 +82,7 @@ const createChatView = () => {
                 "student": {
                     "id": currentUser.id
                 },
-                "content": [ "|" + currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
+                "content": ["|" + currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
             } : {
                 "teacher": {
                     "id": currentUser.id
@@ -86,12 +90,12 @@ const createChatView = () => {
                 "student": {
                     "id": teacherInput.value
                 },
-                "content": [ "|" + currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
+                "content": ["|" + currentUser.username + " " + new Date().toLocaleTimeString() + " --" + msgInput.value]
             };
-            if (currentUser.parentPhone){
+            if (currentUser.parentPhone) {
                 fetch('http://localhost:8080/conversations')
-                .then(response => response.json())
-                .then(conversations => translateSentMessage(conversations, msgBody, teacherInput.value, currentUser.language));
+                    .then(response => response.json())
+                    .then(conversations => translateSentMessage(conversations, msgBody, teacherInput.value, currentUser.language));
             }
             fetch('http://localhost:8080/conversations')
                 .then(response => response.json())
@@ -189,11 +193,11 @@ const renderConversation = (teacherInput) => {
             for (let conversation of conversations) {
                 if (conversation.teacher.id == teacherInput && conversation.student.id == currentUser.id) {
                     translateMessage('en', conversation.student.language, conversation.content);
-                    
+
                 }
                 if (conversation.teacher.id == currentUser.id && conversation.student.id == teacherInput) {
                     translateMessage(conversation.student.language, 'en', conversation.content);
-                    
+
                 }
             }
         })
