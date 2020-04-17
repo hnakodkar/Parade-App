@@ -94,13 +94,21 @@ const displayAssignmentView = () => {
 
     anchor.appendChild(createAssignmentView());
 }
+const displayMainImage = () => {
+    const img  = document.createElement('img');
+    img.src = './images/classroomPic.jpg';
+    anchor.appendChild(img);
+}
 const renderLoginView = () => {
     displayHeader();
     displayFooter();
+    
     const btn = document.createElement('button');
-    btn.innerText = 'User Login';
+    btn.innerText = 'USER LOGIN';
     anchor.appendChild(btn);
-
+    
+    displayMainImage();
+    
     btn.addEventListener('click', () => {
         renderLogin();
     });
