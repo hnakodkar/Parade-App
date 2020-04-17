@@ -115,17 +115,17 @@ const renderLoginView = () => {
 //     displayStudentForm();
 // }
 
-const displayUserInfos = (user) => {
+const displayUserInfos = (user, color) => {
 
 
-    anchor.appendChild(createUserInfosCard(user));
+    anchor.appendChild(createUserInfosCard(user, color));
 }
 const displayTeacherInfo = (JSONresponse) => {
     currentUser = JSONresponse;
     while (anchor.firstChild) {
         anchor.removeChild(anchor.firstChild)
     }
-    displayUserInfos(currentUser);
+    displayUserInfos(currentUser, 'turquoise');
     displayChatView('turquoise');
 
 }
@@ -136,7 +136,7 @@ const displayStudentInfo = (JSONresponse) => {
         anchor.removeChild(anchor.firstChild)
     }
     //renderStudentView();
-    displayUserInfos(currentUser);
+    displayUserInfos(currentUser, 'rgb(112, 112, 209)');
     displayChatView('rgb(112, 112, 209)')
 }
 

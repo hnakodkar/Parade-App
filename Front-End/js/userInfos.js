@@ -1,9 +1,9 @@
-const createUserInfosCard = (userResponse) => {
+const createUserInfosCard = (userResponse, color) => {
     //console.log(userResponse);
     const container = document.createElement('div');
 
     container.classList.add('user');
-
+    container.style.backgroundColor = color;
     const usernameHolder = document.createElement('div');
     usernameHolder.classList.add('userName');
 
